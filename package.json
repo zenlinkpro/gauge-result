@@ -1,12 +1,37 @@
 {
-  "name": "@zenlink-dex/farming-rate-query",
-  "version": "0.0.1",
+  "name": "@utkjs/farming-rate-query",
+  "version": "0.0.4",
   "description": "",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
+    "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js"
+    },
+    "./*": {
+      "import": "./dist/*.js"
+    }
+  },
+  "devDependencies": {
+    "@types/node": "^18.7.13",
+    "axios": "^0.27.2",
+    "jsbi": "^4.3.0",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.4.0",
+    "typescript": "^4.7.4"
+  },
+  "dependencies": {
+    "@ethersproject/abi": "^5.7.0",
+    "ethers": "^5.7.0",
+    "tiny-invariant": "^1.2.0"
+  }
 }
