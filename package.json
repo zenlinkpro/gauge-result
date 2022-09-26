@@ -1,7 +1,7 @@
 {
   "name": "@utkjs/farming-rate-query",
   "type": "module",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "packageManager": "pnpm@7.12.2",
   "description": "",
   "author": "zenlinkpro",
