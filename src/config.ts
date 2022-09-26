@@ -1,11 +1,11 @@
-import { ChainName, NetworkId, ChainId } from './constants.js';
+import { ChainId, ChainName, NetworkId } from './constants.js'
 export interface ChainConfig {
-  networkId: number;
-  chainId: number;
-  chainName: string;
-  rpcUrls?: string[];
-  multicall?: string;
-  gaugeAddress: string;
+  networkId: number
+  chainId: number
+  chainName: string
+  rpcUrls?: string[]
+  multicall?: string
+  gaugeAddress: string
 }
 
 export const MoonbaseChainConfig: ChainConfig = {
@@ -44,7 +44,7 @@ export const AstarChainConfig: ChainConfig = {
   gaugeAddress: '0xe0F74accE55F4Bb97e738a4d4792d9bb2EC2aF7f',
 }
 
-export const FARMING_REWQRD_REPO_URL = 'https://raw.githubusercontent.com/safe-global/safe-apps-sdk/master/';
+export const FARMING_REWQRD_REPO_URL = 'https://raw.githubusercontent.com/safe-global/safe-apps-sdk/master/'
 
 export const CHAIN_CONFIG_MAP = {
   [ChainName.Moonbase]: MoonbaseChainConfig,

@@ -6,34 +6,34 @@ export const multicallAbi = [
           {
             internalType: 'address',
             name: 'target',
-            type: 'address'
+            type: 'address',
           },
           {
             internalType: 'bytes',
             name: 'callData',
-            type: 'bytes'
-          }
+            type: 'bytes',
+          },
         ],
         internalType: 'struct Multicall2.Call[]',
         name: 'calls',
-        type: 'tuple[]'
-      }
+        type: 'tuple[]',
+      },
     ],
     name: 'aggregate',
     outputs: [
       {
         internalType: 'uint256',
         name: 'blockNumber',
-        type: 'uint256'
+        type: 'uint256',
       },
       {
         internalType: 'bytes[]',
         name: 'returnData',
-        type: 'bytes[]'
-      }
+        type: 'bytes[]',
+      },
     ],
     stateMutability: 'nonpayable',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [
@@ -42,70 +42,70 @@ export const multicallAbi = [
           {
             internalType: 'address',
             name: 'target',
-            type: 'address'
+            type: 'address',
           },
           {
             internalType: 'bytes',
             name: 'callData',
-            type: 'bytes'
-          }
+            type: 'bytes',
+          },
         ],
         internalType: 'struct Multicall2.Call[]',
         name: 'calls',
-        type: 'tuple[]'
-      }
+        type: 'tuple[]',
+      },
     ],
     name: 'blockAndAggregate',
     outputs: [
       {
         internalType: 'uint256',
         name: 'blockNumber',
-        type: 'uint256'
+        type: 'uint256',
       },
       {
         internalType: 'bytes32',
         name: 'blockHash',
-        type: 'bytes32'
+        type: 'bytes32',
       },
       {
         components: [
           {
             internalType: 'bool',
             name: 'success',
-            type: 'bool'
+            type: 'bool',
           },
           {
             internalType: 'bytes',
             name: 'returnData',
-            type: 'bytes'
-          }
+            type: 'bytes',
+          },
         ],
         internalType: 'struct Multicall2.Result[]',
         name: 'returnData',
-        type: 'tuple[]'
-      }
+        type: 'tuple[]',
+      },
     ],
     stateMutability: 'nonpayable',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [
       {
         internalType: 'uint256',
         name: 'blockNumber',
-        type: 'uint256'
-      }
+        type: 'uint256',
+      },
     ],
     name: 'getBlockHash',
     outputs: [
       {
         internalType: 'bytes32',
         name: 'blockHash',
-        type: 'bytes32'
-      }
+        type: 'bytes32',
+      },
     ],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [],
@@ -114,11 +114,11 @@ export const multicallAbi = [
       {
         internalType: 'uint256',
         name: 'blockNumber',
-        type: 'uint256'
-      }
+        type: 'uint256',
+      },
     ],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [],
@@ -127,11 +127,11 @@ export const multicallAbi = [
       {
         internalType: 'address',
         name: 'coinbase',
-        type: 'address'
-      }
+        type: 'address',
+      },
     ],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [],
@@ -140,11 +140,11 @@ export const multicallAbi = [
       {
         internalType: 'uint256',
         name: 'difficulty',
-        type: 'uint256'
-      }
+        type: 'uint256',
+      },
     ],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [],
@@ -153,11 +153,11 @@ export const multicallAbi = [
       {
         internalType: 'uint256',
         name: 'gaslimit',
-        type: 'uint256'
-      }
+        type: 'uint256',
+      },
     ],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [],
@@ -166,30 +166,30 @@ export const multicallAbi = [
       {
         internalType: 'uint256',
         name: 'timestamp',
-        type: 'uint256'
-      }
+        type: 'uint256',
+      },
     ],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [
       {
         internalType: 'address',
         name: 'addr',
-        type: 'address'
-      }
+        type: 'address',
+      },
     ],
     name: 'getEthBalance',
     outputs: [
       {
         internalType: 'uint256',
         name: 'balance',
-        type: 'uint256'
-      }
+        type: 'uint256',
+      },
     ],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [],
@@ -198,36 +198,36 @@ export const multicallAbi = [
       {
         internalType: 'bytes32',
         name: 'blockHash',
-        type: 'bytes32'
-      }
+        type: 'bytes32',
+      },
     ],
     stateMutability: 'view',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [
       {
         internalType: 'bool',
         name: 'requireSuccess',
-        type: 'bool'
+        type: 'bool',
       },
       {
         components: [
           {
             internalType: 'address',
             name: 'target',
-            type: 'address'
+            type: 'address',
           },
           {
             internalType: 'bytes',
             name: 'callData',
-            type: 'bytes'
-          }
+            type: 'bytes',
+          },
         ],
         internalType: 'struct Multicall2.Call[]',
         name: 'calls',
-        type: 'tuple[]'
-      }
+        type: 'tuple[]',
+      },
     ],
     name: 'tryAggregate',
     outputs: [
@@ -236,78 +236,78 @@ export const multicallAbi = [
           {
             internalType: 'bool',
             name: 'success',
-            type: 'bool'
+            type: 'bool',
           },
           {
             internalType: 'bytes',
             name: 'returnData',
-            type: 'bytes'
-          }
+            type: 'bytes',
+          },
         ],
         internalType: 'struct Multicall2.Result[]',
         name: 'returnData',
-        type: 'tuple[]'
-      }
+        type: 'tuple[]',
+      },
     ],
     stateMutability: 'nonpayable',
-    type: 'function'
+    type: 'function',
   },
   {
     inputs: [
       {
         internalType: 'bool',
         name: 'requireSuccess',
-        type: 'bool'
+        type: 'bool',
       },
       {
         components: [
           {
             internalType: 'address',
             name: 'target',
-            type: 'address'
+            type: 'address',
           },
           {
             internalType: 'bytes',
             name: 'callData',
-            type: 'bytes'
-          }
+            type: 'bytes',
+          },
         ],
         internalType: 'struct Multicall2.Call[]',
         name: 'calls',
-        type: 'tuple[]'
-      }
+        type: 'tuple[]',
+      },
     ],
     name: 'tryBlockAndAggregate',
     outputs: [
       {
         internalType: 'uint256',
         name: 'blockNumber',
-        type: 'uint256'
+        type: 'uint256',
       },
       {
         internalType: 'bytes32',
         name: 'blockHash',
-        type: 'bytes32'
+        type: 'bytes32',
       },
       {
         components: [
           {
             internalType: 'bool',
             name: 'success',
-            type: 'bool'
+            type: 'bool',
           },
           {
             internalType: 'bytes',
             name: 'returnData',
-            type: 'bytes'
-          }
+            type: 'bytes',
+          },
         ],
         internalType: 'struct Multicall2.Result[]',
         name: 'returnData',
-        type: 'tuple[]'
-      }
+        type: 'tuple[]',
+      },
     ],
     stateMutability: 'nonpayable',
-    type: 'function'
-  }
-];
+    type: 'function',
+  },
+]
