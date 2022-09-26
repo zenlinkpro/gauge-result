@@ -1,6 +1,6 @@
 import axios from 'axios'
-import gaugeAbi from '../abi/gaugeAbi.json'
-import multicallAbi from '../abi/multicallCallAbi.json'
+import gaugeAbi from '../abi/gauge.json'
+import multicallAbi from '../abi/multicall.json'
 import { decodeEvmCallResult, encodeEvmCallData } from './util.js'
 
 export interface QueryScoreParams {

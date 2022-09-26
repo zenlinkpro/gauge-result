@@ -1,20 +1,10 @@
 import axios from 'axios'
 import JSBI from 'jsbi'
-import gaugeAbi from './abi/gaugeAbi.json'
-import multicallAbi from './abi/multicallCallAbi.json'
+import gaugeAbi from './abi/gauge.json'
+import multicallAbi from './abi/multicall.json'
 import { queryGaugeReward } from './reward/gauge.js'
+import type { GaugePoolInfo } from './types'
 import { decodeEvmCallResult, encodeEvmCallData } from './util/util.js'
-
-export interface GaugePoolInfo {
-  pid: number
-  score: number
-  poolInfo: any
-}
-
-export interface GaugeRewards {
-  token: string
-  amount: number | string
-}
 
 export const STABLE_SHARE = 20
 export const STANDARD_SHARE = 80
@@ -173,7 +163,7 @@ export async function queryGaugePoolStateInfo(pids: number[], {
     ],
   })
 
-  const rpcResults = decodeEvmCallResult(multicallAbi, 'tryAggregate', results.data.result).returnData as any[]
+  const rpcResults = decodeEvmCallResult(multicallAbi, 'tryAggregate', results.data.result)?.returnData
   const callResults = calls.reduce<any[]>((memo, current, i) => {
     memo = [...memo, [...rpcResults].splice(i * current.calls.length, current.calls.length)]
 

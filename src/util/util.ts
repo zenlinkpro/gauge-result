@@ -1,5 +1,5 @@
 import { ethers } from 'ethers'
-import type { Fragment, JsonFragment } from '@ethersproject/abi'
+import type { Fragment, JsonFragment, Result } from '@ethersproject/abi'
 
 export function encodeEvmCallData(
   abi: string | ReadonlyArray<Fragment | JsonFragment | string>,
@@ -24,7 +24,7 @@ export function decodeEvmCallResult(
   abi: string | ReadonlyArray<Fragment | JsonFragment | string>,
   method: string,
   result: string,
-): any {
+): Result | undefined {
   try {
     const _interface = new ethers.utils.Interface(abi)
 

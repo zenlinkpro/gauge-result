@@ -1,4 +1,5 @@
-import { ChainId, ChainName, NetworkId } from './constants.js'
+import { ChainId, ChainName, NetworkId } from './types'
+
 export interface ChainConfig {
   networkId: number
   chainId: number

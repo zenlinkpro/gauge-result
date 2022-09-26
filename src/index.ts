@@ -3,19 +3,10 @@ import { queryGaugeFarmingRate } from './queryGaugeFarmingRate.js'
 import { queryFoundationFarmingRate } from './queryFoundationFarmingRate.js'
 import { queryProjectFarmingRate } from './queryProjectFarmingRate.js'
 import { CHAIN_CONFIG_MAP } from './config.js'
-import type { ChainName } from './constants.js'
+import type { ChainName, FarmingRateResult } from './types.js'
 
-export * from './constants.js'
-
-export interface FarmingRateResult {
-  chainName: string
-  gaugeInfo: any
-  projectInfo: any
-  foundationInfo: any
-}
-
-export async function queryFarmingRate(chainName: string): Promise<FarmingRateResult> {
-  const chainConfig = CHAIN_CONFIG_MAP[chainName as ChainName]
+export async function queryFarmingRate(chainName: ChainName): Promise<FarmingRateResult> {
+  const chainConfig = CHAIN_CONFIG_MAP[chainName]
   const rpc = chainConfig.rpcUrls?.[0]
   const gaugeAddress = chainConfig.gaugeAddress
   const multicall = chainConfig.multicall
