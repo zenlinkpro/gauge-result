@@ -14,7 +14,7 @@ export const MoonbaseChainConfig: ChainConfig = {
   chainName: ChainName.Moonbase,
   rpcUrls: ['https://rpc.testnet.moonbeam.network'],
   multicall: '0xa319aAb7b9578c2CdEe4EE9e4FFE5B5c48157cA3',
-  gaugeAddress: '0xe0F74accE55F4Bb97e738a4d4792d9bb2EC2aF7f',
+  gaugeAddress: '0xA12e750486A6edfA30AEaF168AED6689E2c09913',
 }
 
 export const MoonriverChainConfig: ChainConfig = {
@@ -54,7 +54,7 @@ export const CHAIN_CONFIG_MAP = {
 }
 
 export const GAUGE_ADDRESS: Record<string, string> = {
-  [ChainName.Moonbase]: '0x215cE533A57243cCDAD84F7C497AE796BA1EB87d',
+  [ChainName.Moonbase]: '0xA12e750486A6edfA30AEaF168AED6689E2c09913',
   [ChainName.Moonriver]: '0xe0F74accE55F4Bb97e738a4d4792d9bb2EC2aF7f',
   [ChainName.Moonbeam]: '0xe0F74accE55F4Bb97e738a4d4792d9bb2EC2aF7f',
   [ChainName.Astar]: '0xe0F74accE55F4Bb97e738a4d4792d9bb2EC2aF7f',
