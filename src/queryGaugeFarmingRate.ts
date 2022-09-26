@@ -1,7 +1,7 @@
 import axios from 'axios'
 import JSBI from 'jsbi'
-import { gaugeAbi } from './abi/gaugeAbi.js'
-import { multicallAbi } from './abi/multicallCallAbi.js'
+import gaugeAbi from './abi/gaugeAbi.json'
+import multicallAbi from './abi/multicallCallAbi.json'
 import { queryGaugeReward } from './reward/gauge.js'
 import { decodeEvmCallResult, encodeEvmCallData } from './util/util.js'
 
