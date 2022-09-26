@@ -9,4 +9,6 @@ export default defineBuildConfig({
   rollup: {
     emitCJS: true,
   },
+  // due to https://rollupjs.org/guide/en/#error-this-is-undefined
+  failOnWarn: false,
 })
