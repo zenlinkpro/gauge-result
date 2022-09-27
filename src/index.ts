@@ -1,5 +1,5 @@
 import invariant from 'tiny-invariant'
-import { queryGaugeFarmingRate } from './queryGaugeFarmingRate.js'
+import { generateGaugeInfo } from './util/queryGaugeFarmingRate.js'
 import { queryFoundationFarmingRate } from './queryFoundationFarmingRate.js'
 import { queryProjectFarmingRate } from './queryProjectFarmingRate.js'
 import { CHAIN_CONFIG_MAP } from './config.js'
@@ -8,20 +8,20 @@ import type { ChainName, FarmingRateResult } from './types.js'
 export async function queryFarmingRate(chainName: ChainName): Promise<FarmingRateResult> {
   const chainConfig = CHAIN_CONFIG_MAP[chainName]
   const rpc = chainConfig.rpcUrls?.[0]
-  const gaugeAddress = chainConfig.gaugeAddress
-  const multicall = chainConfig.multicall
-  invariant(rpc, 'has no rpc!')
-  invariant(gaugeAddress, 'has no gaugeAddress!')
-  invariant(multicall, 'has no multicall!')
+  const contractAddress = chainConfig.gaugeAddress
+  const multicallAddress = chainConfig.multicall
 
-  const gaugeInfo = await queryGaugeFarmingRate({
+  invariant(rpc, 'has no rpc!')
+  invariant(contractAddress, 'has no gaugeAddress!')
+  invariant(multicallAddress, 'has no multicall!')
+
+  const gaugeInfo = await generateGaugeInfo({
     rpc,
-    gaugeAddress,
-    multicall,
+    contractAddress,
+    multicallAddress,
   })
 
   const projectInfo = await queryProjectFarmingRate()
-
   const foundationInfo = await queryFoundationFarmingRate()
 
   return {

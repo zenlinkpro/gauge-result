@@ -13,7 +13,7 @@ export const MoonbaseChainConfig: ChainConfig = {
   networkId: NetworkId.TestNet,
   chainId: ChainId.Moonbase,
   chainName: ChainName.Moonbase,
-  rpcUrls: ['https://rpc.testnet.moonbeam.network'],
+  rpcUrls: ['https://rpc.api.moonbase.moonbeam.network'],
   multicall: '0xa319aAb7b9578c2CdEe4EE9e4FFE5B5c48157cA3',
   gaugeAddress: '0xA12e750486A6edfA30AEaF168AED6689E2c09913',
 }

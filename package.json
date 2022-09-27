@@ -40,7 +40,8 @@
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
     "test": "vitest",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "example:moonbase": "esno examples/fetchMoonbaseGauge.ts"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -51,12 +52,12 @@
   "devDependencies": {
     "@antfu/eslint-config": "^0.27.0",
     "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/providers": "^5.7.1",
     "@types/node": "^18.7.18",
     "bumpp": "^8.2.1",
     "eslint": "^8.23.1",
     "esno": "^0.16.3",
     "pnpm": "^7.12.2",
-    "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
     "typescript": "^4.8.3",
     "unbuild": "^0.8.11"

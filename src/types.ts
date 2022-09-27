@@ -1,12 +1,66 @@
-export interface GaugePoolInfo {
-  pid: number
-  score: number
-  poolInfo: any
+export enum ChainName {
+  Moonbase = 'Moonbase',
+  Moonbeam = 'Moonbeam',
+  Moonriver = 'Moonriver',
+  Astar = 'Astar',
+}
+
+export enum NetworkId {
+  Polkadot = 300,
+  Kusama = 200,
+  TestNet = 100,
+}
+
+export enum ChainId {
+  Moonbase = 1002,
+  Moonriver = 2023,
+  Moombeam = 2004,
+  Astar = 2006,
+}
+
+export enum RateType {
+  Gauge = 'Gauge',
+  Project = 'Project',
+  Foundation = 'Foundation',
+}
+
+export interface BasicReward {
+  token: string
+  amount: string
 }
 
 export interface GaugeRewards {
-  token: string
-  amount: number | string
+  periodId: number
+  rewards: BasicReward[]
+}
+
+export interface GaugeQueryOptions {
+  rpc: string
+  contractAddress: string
+  multicallAddress: string
+}
+
+export interface PoolInfoFromContract {
+  score: string
+  stable: boolean
+  farmingToken: string
+  amount: string
+  rewardTokens: string[]
+  rewardPerBlock: string[]
+  accRewardPerShare: string[]
+  lastRewardBlock: string
+  startBlock: string
+  claimableInterval: string
+}
+
+export interface GaugePoolInfo extends PoolInfoFromContract {
+  pid: number
+}
+
+export interface QueryScoreParams {
+  multicallAddress: string
+  gaugeAddress: string
+  rpc: string
 }
 
 export interface ProjectRewards {
@@ -33,28 +87,3 @@ export interface FarmingRateResult {
   foundationInfo: any
 }
 
-export enum ChainName {
-  Moonbase = 'Moonbase',
-  Moonbeam = 'Moonbeam',
-  Moonriver = 'Moonriver',
-  Astar = 'Astar',
-}
-
-export enum NetworkId {
-  Polkadot = 300,
-  Kusama = 200,
-  TestNet = 100,
-}
-
-export enum ChainId {
-  Moonbase = 1002,
-  Moonriver = 2023,
-  Moombeam = 2004,
-  Astar = 2006,
-}
-
-export enum RateType {
-  Gauge = 'Gauge',
-  Project = 'Project',
-  Foundation = 'Foundation',
-}

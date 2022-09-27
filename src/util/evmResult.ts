@@ -7,9 +7,8 @@ export function encodeEvmCallData(
   params: any[],
 ): string | undefined {
   try {
-    const _interface = new ethers.utils.Interface(abi)
-
-    const callData = _interface.encodeFunctionData(method, [...params])
+    const contractInterface = new ethers.utils.Interface(abi)
+    const callData = contractInterface.encodeFunctionData(method, params)
 
     return callData
   }
@@ -26,14 +25,13 @@ export function decodeEvmCallResult(
   result: string,
 ): Result | undefined {
   try {
-    const _interface = new ethers.utils.Interface(abi)
-
-    const callData = _interface.decodeFunctionResult(method, result)
+    const contractInterface = new ethers.utils.Interface(abi)
+    const callData = contractInterface.decodeFunctionResult(method, result)
 
     return callData
   }
   catch (error) {
-    // console.error(error);
+    console.error(error)
 
     return undefined
   }

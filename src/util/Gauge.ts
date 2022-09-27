@@ -1,13 +1,9 @@
 import axios from 'axios'
 import gaugeAbi from '../abi/gauge.json'
 import multicallAbi from '../abi/multicall.json'
-import { decodeEvmCallResult, encodeEvmCallData } from './util.js'
+import type { QueryScoreParams } from '../types'
+import { decodeEvmCallResult, encodeEvmCallData } from './evmResult'
 
-export interface QueryScoreParams {
-  multicallAddress: string
-  gaugeAddress: string
-  rpc: string
-}
 export async function queryPoolPeriodStateMulticall(pids: number[], {
   rpc,
   multicallAddress,
@@ -44,7 +40,7 @@ export async function queryPoolPeriodStateMulticall(pids: number[], {
     ],
   })
 
-  const rpcResults = decodeEvmCallResult(multicallAbi, 'tryAggregate', results.data.result).returnData as any[]
+  const rpcResults = decodeEvmCallResult(multicallAbi, 'tryAggregate', results.data.result)?.returnData as any[]
   const callResults = calls.reduce<any[]>((memo, current, i) => {
     memo = [...memo, [...rpcResults].splice(i * current.calls.length, current.calls.length)]
 

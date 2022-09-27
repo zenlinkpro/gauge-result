@@ -23,12 +23,82 @@
       },
       {
         "internalType": "uint256",
-        "name": "firstPeriodStart",
+        "name": "_firstPeriodStart",
         "type": "uint256"
       }
     ],
     "stateMutability": "nonpayable",
     "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount0",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "amount1",
+        "type": "uint256"
+      }
+    ],
+    "name": "AmountNotEqual",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ArrayMismatch",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "InsuffientAmount",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "block",
+        "type": "uint256"
+      }
+    ],
+    "name": "InvalidBlock",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "curPeriod",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "period",
+        "type": "uint256"
+      }
+    ],
+    "name": "NoNeedToUpdate",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "poolId",
+        "type": "uint256"
+      }
+    ],
+    "name": "PoolNotAllowedToVote",
+    "type": "error"
   },
   {
     "anonymous": false,
@@ -61,68 +131,6 @@
       {
         "indexed": true,
         "internalType": "uint256",
-        "name": "periodId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "poolIds",
-        "type": "uint256[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "amounts",
-        "type": "uint256[]"
-      }
-    ],
-    "name": "BatchCancelVote",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "voter",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "uint256",
-        "name": "periodId",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "poolIds",
-        "type": "uint256[]"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256[]",
-        "name": "amounts",
-        "type": "uint256[]"
-      }
-    ],
-    "name": "BatchVote",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "voter",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "uint256",
         "name": "period",
         "type": "uint256"
       },
@@ -136,6 +144,18 @@
         "indexed": false,
         "internalType": "uint256",
         "name": "amount",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "poolPeriodScore",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "poolPeriodAmount",
         "type": "uint256"
       }
     ],
@@ -185,7 +205,7 @@
       {
         "indexed": false,
         "internalType": "bool",
-        "name": "voteable",
+        "name": "votable",
         "type": "bool"
       }
     ],
@@ -251,7 +271,7 @@
         "type": "uint256[]"
       }
     ],
-    "name": "SetNonVoteablePools",
+    "name": "SetNonVotablePools",
     "type": "event"
   },
   {
@@ -270,7 +290,7 @@
         "type": "uint256[]"
       }
     ],
-    "name": "SetVoteablePools",
+    "name": "SetVotablePools",
     "type": "event"
   },
   {
@@ -297,7 +317,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "maxUpdatePeriods",
+        "name": "needUpdatePool",
         "type": "uint256"
       },
       {
@@ -307,7 +327,7 @@
         "type": "uint256"
       }
     ],
-    "name": "UpdatePool",
+    "name": "UpdatePoolHistory",
     "type": "event"
   },
   {
@@ -412,6 +432,18 @@
         "internalType": "uint256",
         "name": "amount",
         "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "poolPeriodScore",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "poolPeriodAmount",
+        "type": "uint256"
       }
     ],
     "name": "Vote",
@@ -465,12 +497,12 @@
       },
       {
         "internalType": "bool",
-        "name": "resetVoteable",
+        "name": "resetVotable",
         "type": "bool"
       },
       {
         "internalType": "bool",
-        "name": "voteable",
+        "name": "votable",
         "type": "bool"
       },
       {
@@ -719,7 +751,20 @@
         "type": "uint256[]"
       }
     ],
-    "name": "setNonVoteablePools",
+    "name": "setNonStablePools",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "poolIds",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "setNonVotablePools",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -745,7 +790,7 @@
         "type": "uint256[]"
       }
     ],
-    "name": "setVoteablePools",
+    "name": "setVotablePools",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -778,11 +823,11 @@
       },
       {
         "internalType": "uint256",
-        "name": "maxUpdatedPeriods",
+        "name": "needUpdatePeriodId",
         "type": "uint256"
       }
     ],
-    "name": "updatePool",
+    "name": "updatePoolHistory",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
