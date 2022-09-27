@@ -1,7 +1,7 @@
 import invariant from 'tiny-invariant'
-import { generateGaugeInfo } from './util/queryGaugeFarmingRate.js'
-import { queryFoundationFarmingRate } from './queryFoundationFarmingRate.js'
-import { queryProjectFarmingRate } from './queryProjectFarmingRate.js'
+import { generateGaugeInfo } from './utils/queryGaugeFarmingRate.js'
+import { queryFoundationFarmingRate } from './utils/queryFoundationFarmingRate.js'
+import { queryProjectFarmingRate } from './utils/queryProjectFarmingRate.js'
 import { CHAIN_CONFIG_MAP } from './config.js'
 import type { ChainName, FarmingRateResult } from './types.js'
 
