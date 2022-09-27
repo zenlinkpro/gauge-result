@@ -43,7 +43,7 @@
     "typecheck": "tsc --noEmit",
     "example:moonbase": "esno examples/fetchMoonbaseGauge.ts",
     "test": "vitest",
-    "test:ci": "nr build && nr typecheck && nr lint"
+    "test:ci": "nr build && nr typecheck && nr lint && ni test"
   },
   "dependencies": {
     "@ethersproject/providers": "^5.7.1",
