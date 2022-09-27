@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { generateFarmingParameters } from '../dist'
+import { generateFarmingParameters } from '../src'
 import { ChainName } from '../src/types'
 
 describe('chore', () => {
