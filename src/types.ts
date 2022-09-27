@@ -5,9 +5,9 @@ export enum ChainName {
 }
 
 export enum NetworkId {
-  Polkadot = 300,
-  Kusama = 200,
   TestNet = 100,
+  Kusama = 200,
+  Polkadot = 300,
 }
 
 export enum ChainId {
@@ -22,6 +22,7 @@ export interface ChainConfig {
   chainId: ChainId
   chainName: ChainName
   rpc: string
+  graphqlEndpoint: string
   multicallAddress: string
   gaugeAddress: string
   farmingAddress: string

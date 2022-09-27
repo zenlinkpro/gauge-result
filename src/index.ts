@@ -2,7 +2,7 @@ import { JsonRpcProvider } from '@ethersproject/providers'
 import { generateGaugeInfo } from './utils/generateGaugeInfo'
 import { queryFoundationFarmingRate } from './utils/queryFoundationFarmingRate'
 import { queryProjectFarmingRate } from './utils/queryProjectFarmingRate'
-import { CHAIN_CONFIG_MAP } from './config'
+import { CHAIN_CONFIGS } from './config'
 import type { ChainName, FarmingRateResult } from './types'
 
 export async function generateFarmingParameters(
@@ -14,7 +14,8 @@ export async function generateFarmingParameters(
     gaugeAddress,
     multicallAddress,
     farmingAddress,
-  } = CHAIN_CONFIG_MAP[chainName]
+  } = CHAIN_CONFIGS[chainName]
+
   const provider = new JsonRpcProvider(rpc)
 
   const gaugeInfo = await generateGaugeInfo({

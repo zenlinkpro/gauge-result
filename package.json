@@ -42,6 +42,7 @@
     "start": "esno src/index.ts",
     "typecheck": "tsc --noEmit",
     "example:moonbase": "esno examples/fetchMoonbaseGauge.ts",
+    "test": "vitest",
     "test:ci": "nr build && nr typecheck && nr lint"
   },
   "dependencies": {
@@ -62,6 +63,7 @@
     "pnpm": "^7.12.2",
     "tslib": "^2.4.0",
     "typescript": "^4.8.3",
-    "unbuild": "^0.8.11"
+    "unbuild": "^0.8.11",
+    "vitest": "^0.23.4"
   }
 }
