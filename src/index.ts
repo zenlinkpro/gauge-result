@@ -1,24 +1,29 @@
-import invariant from 'tiny-invariant'
-import { generateGaugeInfo } from './utils/queryGaugeFarmingRate.js'
-import { queryFoundationFarmingRate } from './utils/queryFoundationFarmingRate.js'
-import { queryProjectFarmingRate } from './utils/queryProjectFarmingRate.js'
-import { CHAIN_CONFIG_MAP } from './config.js'
-import type { ChainName, FarmingRateResult } from './types.js'
+import { JsonRpcProvider } from '@ethersproject/providers'
+import { generateGaugeInfo } from './utils/generateGaugeInfo'
+import { queryFoundationFarmingRate } from './utils/queryFoundationFarmingRate'
+import { queryProjectFarmingRate } from './utils/queryProjectFarmingRate'
+import { CHAIN_CONFIG_MAP } from './config'
+import type { ChainName, FarmingRateResult } from './types'
 
-export async function queryFarmingRate(chainName: ChainName): Promise<FarmingRateResult> {
-  const chainConfig = CHAIN_CONFIG_MAP[chainName]
-  const rpc = chainConfig.rpcUrls?.[0]
-  const contractAddress = chainConfig.gaugeAddress
-  const multicallAddress = chainConfig.multicall
-
-  invariant(rpc, 'has no rpc!')
-  invariant(contractAddress, 'has no gaugeAddress!')
-  invariant(multicallAddress, 'has no multicall!')
+export async function generateFarmingParameters(
+  chainName: ChainName,
+  periodId?: number,
+): Promise<FarmingRateResult> {
+  const {
+    rpc,
+    gaugeAddress,
+    multicallAddress,
+    farmingAddress,
+  } = CHAIN_CONFIG_MAP[chainName]
+  const provider = new JsonRpcProvider(rpc)
 
   const gaugeInfo = await generateGaugeInfo({
     rpc,
-    contractAddress,
+    gaugeAddress,
     multicallAddress,
+    periodId,
+    provider,
+    farmingAddress,
   })
 
   const projectInfo = await queryProjectFarmingRate()

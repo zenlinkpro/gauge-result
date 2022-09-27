@@ -1,8 +1,7 @@
+import type { JsonRpcProvider } from '@ethersproject/providers'
+
 export enum ChainName {
   Moonbase = 'Moonbase',
-  Moonbeam = 'Moonbeam',
-  Moonriver = 'Moonriver',
-  Astar = 'Astar',
 }
 
 export enum NetworkId {
@@ -16,6 +15,16 @@ export enum ChainId {
   Moonriver = 2023,
   Moombeam = 2004,
   Astar = 2006,
+}
+
+export interface ChainConfig {
+  networkId: NetworkId
+  chainId: ChainId
+  chainName: ChainName
+  rpc: string
+  multicallAddress: string
+  gaugeAddress: string
+  farmingAddress: string
 }
 
 export enum RateType {
@@ -36,8 +45,11 @@ export interface GaugeRewards {
 
 export interface GaugeQueryOptions {
   rpc: string
-  contractAddress: string
+  gaugeAddress: string
   multicallAddress: string
+  farmingAddress: string
+  periodId?: number
+  provider: JsonRpcProvider
 }
 
 export interface PoolInfoFromContract {

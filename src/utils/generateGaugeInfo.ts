@@ -1,17 +1,42 @@
 import JSBI from 'jsbi'
 import invariant from 'tiny-invariant'
-import type { BigNumber } from 'ethers'
 import { Contract } from 'ethers'
-import { JsonRpcProvider } from '@ethersproject/providers'
-import GAUGE_ABI from '../abi/gauge.json'
-import MULTICALL_ABI from '../abi/multicall.json'
-import { queryGaugeRewards } from '../reward/gauge.js'
+import type { BigNumber } from 'ethers'
+import { queryGaugeRewards } from '../rewards/gauge'
 import { STABLE_SHARE, TOTAL_SHARE } from '../constants'
+import GAUGE_ABI from '../abis/gauge.json'
+import MULTICALL_ABI from '../abis/multicall.json'
+import FARMING_ABI from '../abis/farming.json'
 import type { GaugePoolInfo, GaugeQueryOptions } from '../types'
 import { decodeEvmCallResult, encodeEvmCallData } from './evmResult'
 
 export async function generateGaugeInfo(options: GaugeQueryOptions) {
-  const gaugePoolInfo = await queryGaugePoolInfo([0, 1], options)
+  const {
+    gaugeAddress,
+    periodId,
+    provider,
+    farmingAddress,
+  } = options
+
+  const farmingContract = new Contract(farmingAddress, FARMING_ABI).connect(provider)
+  const gaugeContract = new Contract(gaugeAddress, GAUGE_ABI).connect(provider)
+
+  const [currentPeriodId, poolLength] = await Promise.all([
+    (await gaugeContract.callStatic.getCurrentPeriodId()).toNumber(),
+    (await farmingContract.callStatic.poolLength()).toNumber(),
+  ])
+
+  const gaugePoolInfo = !periodId || periodId === currentPeriodId
+    ? await queryGaugePoolInfo(
+      // todo should filter votable pools
+      Array.from({ length: poolLength }, (_, i) => i),
+      {
+        ...options,
+        provider,
+      },
+    )
+    // todo graphql fetch
+    : []
 
   const stablePoolInfos: GaugePoolInfo[] = []
   const standardPoolInfos: GaugePoolInfo[] = []
@@ -31,11 +56,7 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
     (totalScore, { score }) => JSBI.add(totalScore, JSBI.BigInt(score)), JSBI.BigInt(0),
   )
 
-  const contract = new Contract(options.contractAddress, GAUGE_ABI)
-    .connect(new JsonRpcProvider(options.rpc))
-  const periodID: BigNumber = await contract.callStatic.getCurrentPeriodId()
-
-  const gaugeRewards = await queryGaugeRewards(periodID.toNumber())
+  const gaugeRewards = await queryGaugeRewards(currentPeriodId)
   invariant(!!gaugeRewards, 'cannot find gaugeRewards')
 
   const rewardsDetails = gaugeRewards.rewards.map(({ token, amount }) => {
@@ -99,10 +120,14 @@ export async function queryGaugePoolInfo(
   pids: number[],
   options: GaugeQueryOptions,
 ): Promise<GaugePoolInfo[]> {
-  const { rpc, multicallAddress, contractAddress } = options
+  const {
+    multicallAddress,
+    gaugeAddress,
+    provider,
+  } = options
 
   const multicalls = pids.map(pid => ({
-    target: contractAddress,
+    target: gaugeAddress,
     calls: [{
       method: 'getPoolInfo',
       callData: encodeEvmCallData(GAUGE_ABI, 'getPoolInfo', [pid]),
@@ -117,9 +142,8 @@ export async function queryGaugePoolInfo(
     }))),
   ).flat()
 
-  const contract = new Contract(multicallAddress, MULTICALL_ABI)
-    .connect(new JsonRpcProvider(rpc))
-  const results = await contract.callStatic.tryAggregate(
+  const multicallContract = new Contract(multicallAddress, MULTICALL_ABI).connect(provider)
+  const results = await multicallContract.callStatic.tryAggregate(
     false,
     callChunks,
   )

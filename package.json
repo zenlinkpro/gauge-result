@@ -37,11 +37,12 @@
     "build": "unbuild",
     "dev": "unbuild --stub",
     "lint": "eslint .",
+    "lint:fix": "nr lint --fix",
     "release": "bumpp && npm publish",
     "start": "esno src/index.ts",
-    "test": "vitest",
     "typecheck": "tsc --noEmit",
-    "example:moonbase": "esno examples/fetchMoonbaseGauge.ts"
+    "example:moonbase": "esno examples/fetchMoonbaseGauge.ts",
+    "test:ci": "nr build && nr typecheck && nr lint"
   },
   "dependencies": {
     "@ethersproject/providers": "^5.7.1",
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.27.0",
+    "@antfu/ni": "^0.18.0",
     "@ethersproject/abi": "^5.7.0",
     "@types/node": "^18.7.18",
     "bumpp": "^8.2.1",
