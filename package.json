@@ -1,12 +1,65 @@
 {
-  "name": "@zenlink-dex/farming-rate-query",
-  "version": "0.0.1",
+  "name": "@utkjs/farming-rate-query",
+  "type": "module",
+  "version": "0.0.10",
+  "packageManager": "pnpm@7.12.2",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "author": "zenlinkpro",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zenlinkpro/farming-rate-query.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "sideEffects": false,
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./dist/index.d.ts"
+      ]
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "unbuild",
+    "dev": "unbuild --stub",
+    "lint": "eslint .",
+    "release": "bumpp && npm publish",
+    "start": "esno src/index.ts",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "example:moonbase": "esno examples/fetchMoonbaseGauge.ts"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "ethers": "^5.7.0",
+    "jsbi": "^4.3.0",
+    "tiny-invariant": "^1.2.0"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.27.0",
+    "@ethersproject/abi": "^5.7.0",
+    "@ethersproject/providers": "^5.7.1",
+    "@types/node": "^18.7.18",
+    "bumpp": "^8.2.1",
+    "eslint": "^8.23.1",
+    "esno": "^0.16.3",
+    "pnpm": "^7.12.2",
+    "tslib": "^2.4.0",
+    "typescript": "^4.8.3",
+    "unbuild": "^0.8.11"
+  }
 }

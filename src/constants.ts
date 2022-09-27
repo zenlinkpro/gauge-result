@@ -1,0 +1,3 @@
+export const STABLE_SHARE = 20
+export const STANDARD_SHARE = 80
+export const TOTAL_SHARE = STABLE_SHARE + STANDARD_SHARE
