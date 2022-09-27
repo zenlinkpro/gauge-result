@@ -14,6 +14,7 @@ export async function generateFarmingParameters(
     gaugeAddress,
     multicallAddress,
     farmingAddress,
+    ethereumChainId,
   } = CHAIN_CONFIGS[chainName]
 
   const provider = new JsonRpcProvider(rpc)
@@ -25,6 +26,7 @@ export async function generateFarmingParameters(
     periodId,
     provider,
     farmingAddress,
+    ethereumChainId,
   })
 
   const projectInfo = await queryProjectFarmingRate()

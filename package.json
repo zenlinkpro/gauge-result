@@ -43,12 +43,13 @@
     "typecheck": "tsc --noEmit",
     "example:moonbase": "esno examples/fetchMoonbaseGauge.ts",
     "test": "vitest",
-    "test:ci": "nr build && nr typecheck && nr lint && ni test"
+    "test:ci": "nr build && nr typecheck && nr lint && nr test"
   },
   "dependencies": {
     "@ethersproject/providers": "^5.7.1",
+    "@wagmi/core": "^0.5.7",
     "axios": "^0.27.2",
-    "ethers": "^5.7.0",
+    "ethers": "^5.7.1",
     "jsbi": "^4.3.0",
     "tiny-invariant": "^1.2.0"
   },

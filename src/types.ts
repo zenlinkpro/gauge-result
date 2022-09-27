@@ -17,9 +17,14 @@ export enum ChainId {
   Astar = 2006,
 }
 
+export enum EthereumChainId {
+  Moonbase = 1287,
+}
+
 export interface ChainConfig {
   networkId: NetworkId
   chainId: ChainId
+  ethereumChainId: EthereumChainId
   chainName: ChainName
   rpc: string
   graphqlEndpoint: string
@@ -46,6 +51,7 @@ export interface GaugeRewards {
 
 export interface GaugeQueryOptions {
   rpc: string
+  ethereumChainId: EthereumChainId
   gaugeAddress: string
   multicallAddress: string
   farmingAddress: string

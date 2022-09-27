@@ -1,14 +1,17 @@
 import JSBI from 'jsbi'
 import invariant from 'tiny-invariant'
-import { Contract } from 'ethers'
 import type { BigNumber } from 'ethers'
+import { allChains, configureChains, createClient, readContract } from '@wagmi/core'
+import { publicProvider } from '@wagmi/core/providers/public'
 import { queryGaugeRewards } from '../rewards/gauge'
 import { STABLE_SHARE, TOTAL_SHARE } from '../constants'
-import GAUGE_ABI from '../abis/gauge.json'
-import MULTICALL_ABI from '../abis/multicall.json'
-import FARMING_ABI from '../abis/farming.json'
+import gaugeABI from '../abis/gauge.json'
+import farmingABI from '../abis/farming.json'
 import type { GaugePoolInfo, GaugeQueryOptions } from '../types'
-import { decodeEvmCallResult, encodeEvmCallData } from './evmResult'
+import { chainsForWagmi } from '../config'
+
+const { provider } = configureChains([...allChains, ...chainsForWagmi], [publicProvider()])
+createClient({ provider })
 
 export async function generateGaugeInfo(options: GaugeQueryOptions) {
   const {
@@ -16,18 +19,28 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
     periodId,
     provider,
     farmingAddress,
+    ethereumChainId,
   } = options
 
-  const farmingContract = new Contract(farmingAddress, FARMING_ABI).connect(provider)
-  const gaugeContract = new Contract(gaugeAddress, GAUGE_ABI).connect(provider)
-
   const [currentPeriodId, poolLength] = await Promise.all([
-    (await gaugeContract.callStatic.getCurrentPeriodId()).toNumber(),
-    (await farmingContract.callStatic.poolLength()).toNumber(),
+    (await readContract({
+      addressOrName: gaugeAddress,
+      functionName: 'getCurrentPeriodId',
+      args: [],
+      chainId: ethereumChainId,
+      contractInterface: gaugeABI,
+    })).toNumber(),
+    (await readContract({
+      addressOrName: farmingAddress,
+      functionName: 'poolLength',
+      args: [],
+      chainId: ethereumChainId,
+      contractInterface: farmingABI,
+    })).toNumber(),
   ])
 
   const gaugePoolInfo = !periodId || periodId === currentPeriodId
-    ? await queryGaugePoolInfo(
+    ? await getGaugePoolInfo(
       // todo should filter votable pools
       Array.from({ length: poolLength }, (_, i) => i),
       {
@@ -116,49 +129,23 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
   }
 }
 
-export async function queryGaugePoolInfo(
+export async function getGaugePoolInfo(
   pids: number[],
   options: GaugeQueryOptions,
-): Promise<GaugePoolInfo[]> {
-  const {
-    multicallAddress,
-    gaugeAddress,
-    provider,
-  } = options
-
-  const multicalls = pids.map(pid => ({
-    target: gaugeAddress,
-    calls: [{
-      method: 'getPoolInfo',
-      callData: encodeEvmCallData(GAUGE_ABI, 'getPoolInfo', [pid]),
-    }],
-  }))
-
-  const callChunks = multicalls.map(({ target, calls }) => (
-    calls.map(({ method, callData }) => ({
-      target,
-      method,
-      callData,
-    }))),
-  ).flat()
-
-  const multicallContract = new Contract(multicallAddress, MULTICALL_ABI).connect(provider)
-  const results = await multicallContract.callStatic.tryAggregate(
-    false,
-    callChunks,
-  )
-
-  const callResults = multicalls.reduce<any[]>((memo, current, i) => {
-    memo = [...memo, [...results].splice(i * current.calls.length, current.calls.length)]
-
-    return memo
-  }, [])
-
-  if (!callResults)
-    return []
-
-  return callResults.map((results, i) => {
-    const {
+) {
+  const { gaugeAddress, ethereumChainId } = options
+  return Promise.all(
+    pids.map(pid =>
+      readContract({
+        addressOrName: gaugeAddress,
+        functionName: 'getPoolInfo',
+        args: [pid],
+        chainId: ethereumChainId,
+        contractInterface: gaugeABI,
+      }),
+    ),
+  ).then(results =>
+    results.map(({
       score,
       stable,
       farmingToken,
@@ -169,13 +156,7 @@ export async function queryGaugePoolInfo(
       lastRewardBlock,
       startBlock,
       claimableInterval,
-    } = results.map((result: { returnData: string }) => decodeEvmCallResult(
-      GAUGE_ABI,
-      'getPoolInfo',
-      result.returnData,
-    ))[0]
-
-    return {
+    }, i) => ({
       pid: pids[i],
       score: score.toString(),
       stable,
@@ -187,6 +168,6 @@ export async function queryGaugePoolInfo(
       lastRewardBlock: lastRewardBlock.toString(),
       startBlock: startBlock.toString(),
       claimableInterval: claimableInterval.toString(),
-    }
-  })
+    })),
+  )
 }
