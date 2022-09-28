@@ -1,4 +1,3 @@
-import { JsonRpcProvider } from '@ethersproject/providers'
 import { generateGaugeInfo } from './utils/generateGaugeInfo'
 import { queryFoundationFarmingRate } from './utils/queryFoundationFarmingRate'
 import { queryProjectFarmingRate } from './utils/queryProjectFarmingRate'
@@ -17,14 +16,11 @@ export async function generateFarmingParameters(
     ethereumChainId,
   } = CHAIN_CONFIGS[chainName]
 
-  const provider = new JsonRpcProvider(rpc)
-
   const gaugeInfo = await generateGaugeInfo({
     rpc,
     gaugeAddress,
     multicallAddress,
     periodId,
-    provider,
     farmingAddress,
     ethereumChainId,
   })

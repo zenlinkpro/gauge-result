@@ -1,5 +1,3 @@
-import type { JsonRpcProvider } from '@ethersproject/providers'
-
 export enum ChainName {
   Moonbase = 'Moonbase',
 }
@@ -56,10 +54,10 @@ export interface GaugeQueryOptions {
   multicallAddress: string
   farmingAddress: string
   periodId?: number
-  provider: JsonRpcProvider
 }
 
-export interface PoolInfoFromContract {
+export interface GaugePoolInfo {
+  pid: number
   score: string
   stable: boolean
   farmingToken: string
@@ -70,10 +68,6 @@ export interface PoolInfoFromContract {
   lastRewardBlock: string
   startBlock: string
   claimableInterval: string
-}
-
-export interface GaugePoolInfo extends PoolInfoFromContract {
-  pid: number
 }
 
 export interface QueryScoreParams {

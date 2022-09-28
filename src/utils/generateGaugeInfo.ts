@@ -7,7 +7,7 @@ import { queryGaugeRewards } from '../rewards/gauge'
 import { STABLE_SHARE, TOTAL_SHARE } from '../constants'
 import gaugeABI from '../abis/gauge.json'
 import farmingABI from '../abis/farming.json'
-import type { GaugePoolInfo, GaugeQueryOptions } from '../types'
+import type { EthereumChainId, GaugePoolInfo, GaugeQueryOptions } from '../types'
 import { chainsForWagmi } from '../config'
 
 const { provider } = configureChains([...allChains, ...chainsForWagmi], [publicProvider()])
@@ -17,36 +17,23 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
   const {
     gaugeAddress,
     periodId,
-    provider,
     farmingAddress,
     ethereumChainId,
   } = options
 
   const [currentPeriodId, poolLength] = await Promise.all([
-    (await readContract({
-      addressOrName: gaugeAddress,
-      functionName: 'getCurrentPeriodId',
-      args: [],
-      chainId: ethereumChainId,
-      contractInterface: gaugeABI,
-    })).toNumber(),
-    (await readContract({
-      addressOrName: farmingAddress,
-      functionName: 'poolLength',
-      args: [],
-      chainId: ethereumChainId,
-      contractInterface: farmingABI,
-    })).toNumber(),
+    getCurrentPeriodId(gaugeAddress, ethereumChainId),
+    getFarmingPoolLength(farmingAddress, ethereumChainId),
   ])
 
-  const gaugePoolInfo = !periodId || periodId === currentPeriodId
+  if (periodId && periodId > Number(currentPeriodId))
+    throw new Error(`Provided periodId ${periodId} larger than current periodId ${currentPeriodId}`)
+
+  const gaugePoolInfo = !periodId || periodId === Number(currentPeriodId)
     ? await getGaugePoolInfo(
       // todo should filter votable pools
-      Array.from({ length: poolLength }, (_, i) => i),
-      {
-        ...options,
-        provider,
-      },
+      Array.from({ length: Number(poolLength) }, (_, i) => i),
+      options,
     )
     // todo graphql fetch
     : []
@@ -69,8 +56,8 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
     (totalScore, { score }) => JSBI.add(totalScore, JSBI.BigInt(score)), JSBI.BigInt(0),
   )
 
-  const gaugeRewards = await queryGaugeRewards(currentPeriodId)
-  invariant(!!gaugeRewards, 'cannot find gaugeRewards')
+  const gaugeRewards = await queryGaugeRewards(Number(currentPeriodId))
+  invariant(!!gaugeRewards, 'Cannot find gaugeRewards')
 
   const rewardsDetails = gaugeRewards.rewards.map(({ token, amount }) => {
     const amountForStablePool = JSBI.divide(
@@ -127,6 +114,26 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
     stableGaugePoolRewards,
     standardGaugePoolRewards,
   }
+}
+
+async function getCurrentPeriodId(contract: string, chainId: EthereumChainId) {
+  return (await readContract({
+    addressOrName: contract,
+    functionName: 'getCurrentPeriodId',
+    args: [],
+    chainId,
+    contractInterface: gaugeABI,
+  })).toString()
+}
+
+async function getFarmingPoolLength(contract: string, chainId: EthereumChainId) {
+  return (await readContract({
+    addressOrName: contract,
+    functionName: 'poolLength',
+    args: [],
+    chainId,
+    contractInterface: farmingABI,
+  })).toString()
 }
 
 export async function getGaugePoolInfo(

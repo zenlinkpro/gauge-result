@@ -28,7 +28,7 @@ export const chainsForWagmi = [
     },
     multicall: {
       address: '0xa319aAb7b9578c2CdEe4EE9e4FFE5B5c48157cA3',
-      blockCreated: 11907934,
+      blockCreated: 1207735,
     },
   },
 ]
