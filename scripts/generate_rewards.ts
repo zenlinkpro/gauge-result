@@ -16,7 +16,9 @@ console.log()
 console.log(`rewards v${version}`)
 
 for (const dir of dirs) {
-  const files = fg.sync(`src/rewards/${dir}/**/*.json`, { absolute: true })
+  const files = fg.sync(`src/rewards/${dir}/**/period_[[:digit:]].json`, {
+    absolute: true,
+  })
   const configMap: { [chainName: string]: GaugeRewards[] } = {}
   let content = ''
   for (const file of files) {
