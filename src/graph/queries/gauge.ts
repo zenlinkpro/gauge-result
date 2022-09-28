@@ -34,6 +34,19 @@ export const GAUGE_FETCH = gql`
   }
 `
 
+export interface GraphPoolState {
+  id: string
+  periodId: number
+  poolId: number
+  inherit: boolean
+  votable: boolean
+  resetVotable: boolean
+  totalAmount: string
+  score: string
+  timestamp: string
+  updatedAt: string
+}
+
 interface GaugeGraphResult {
   gaugeById: {
     id: string
@@ -48,18 +61,7 @@ interface GaugeGraphResult {
       totalScore: string
       timestamp: string
       updatedAt: string
-      allPoolStates: {
-        id: string
-        periodId: number
-        poolId: number
-        inherit: boolean
-        votable: boolean
-        resetVotable: boolean
-        totalAmount: string
-        score: string
-        timestamp: string
-        updatedAt: string
-      }[]
+      allPoolStates: GraphPoolState[]
     }[]
   }
 }

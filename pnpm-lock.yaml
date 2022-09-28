@@ -17,7 +17,6 @@ importers:
       graphql: ^16.6.0
       jsbi: ^4.3.0
       pnpm: ^7.12.2
-      tiny-invariant: ^1.2.0
       tslib: ^2.4.0
       typescript: ^4.8.3
       unbuild: ^0.8.11
@@ -28,7 +27,6 @@ importers:
       ethers: registry.npmjs.org/ethers/5.7.1
       graphql: registry.npmjs.org/graphql/16.6.0
       jsbi: registry.npmjs.org/jsbi/4.3.0
-      tiny-invariant: registry.npmjs.org/tiny-invariant/1.2.0
     devDependencies:
       '@antfu/eslint-config': registry.npmjs.org/@antfu/eslint-config/0.27.0_7ilbxdl5iguzcjriqqcg2m5cku
       '@antfu/ni': registry.npmjs.org/@antfu/ni/0.18.0
@@ -4842,12 +4840,6 @@ packages:
     name: text-table
     version: 0.2.0
     dev: true
-
-  registry.npmjs.org/tiny-invariant/1.2.0:
-    resolution: {integrity: sha512-1Uhn/aqw5C6RI4KejVeTg6mIS7IqxnLJ8Mv2tV5rTc0qWobay7pDUz6Wi392Cnc8ak1H0F2cjoRzb2/AW4+Fvg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/tiny-invariant/-/tiny-invariant-1.2.0.tgz}
-    name: tiny-invariant
-    version: 1.2.0
-    dev: false
 
   registry.npmjs.org/tinybench/2.1.5:
     resolution: {integrity: sha512-ak+PZZEuH3mw6CCFOgf5S90YH0MARnZNhxjhjguAmoJimEMAJuNip/rJRd6/wyylHItomVpKTzZk9zrhTrQCoQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/tinybench/-/tinybench-2.1.5.tgz}

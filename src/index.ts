@@ -17,6 +17,7 @@ export async function generateFarmingParameters(
   } = CHAIN_CONFIGS[chainName]
 
   const gaugeInfo = await generateGaugeInfo({
+    chainName,
     rpc,
     gaugeAddress,
     multicallAddress,

@@ -50,8 +50,7 @@
     "@wagmi/core": "^0.5.7",
     "ethers": "^5.7.1",
     "graphql": "^16.6.0",
-    "jsbi": "^4.3.0",
-    "tiny-invariant": "^1.2.0"
+    "jsbi": "^4.3.0"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.27.0",

@@ -1,5 +1,4 @@
 import JSBI from 'jsbi'
-import invariant from 'tiny-invariant'
 import type { BigNumber } from 'ethers'
 import { allChains, configureChains, createClient, readContract } from '@wagmi/core'
 import { publicProvider } from '@wagmi/core/providers/public'
@@ -9,12 +8,15 @@ import gaugeABI from '../abis/gauge.json'
 import farmingABI from '../abis/farming.json'
 import type { EthereumChainId, GaugePoolInfo, GaugeQueryOptions } from '../types'
 import { chainsForWagmi } from '../config'
+import type { GraphPoolState } from '../graph/queries/gauge'
+import { fetchGraphGaugeData } from '../graph/queries/gauge'
 
 const { provider } = configureChains([...allChains, ...chainsForWagmi], [publicProvider()])
 createClient({ provider })
 
 export async function generateGaugeInfo(options: GaugeQueryOptions) {
   const {
+    chainName,
     gaugeAddress,
     periodId,
     farmingAddress,
@@ -29,14 +31,38 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
   if (periodId && periodId > Number(currentPeriodId))
     throw new Error(`Provided periodId ${periodId} larger than current periodId ${currentPeriodId}`)
 
-  const gaugePoolInfo = !periodId || periodId === Number(currentPeriodId)
-    ? await getGaugePoolInfo(
-      // todo should filter votable pools
-      Array.from({ length: Number(poolLength) }, (_, i) => i),
-      options,
-    )
-    // todo graphql fetch
-    : []
+  const exactPeriodId = periodId ?? Number(currentPeriodId)
+  const { data: graphGaugeData, error: graphError } = await fetchGraphGaugeData(
+    chainName,
+    gaugeAddress.toLowerCase(),
+    exactPeriodId,
+  )
+
+  if (!graphGaugeData && graphError)
+    throw new Error('Graph fetch error')
+
+  const allPoolStates = graphGaugeData?.periodStates[0]?.allPoolStates
+  const allPoolStatesMap = allPoolStates
+    ? allPoolStates.reduce((accum: { [poolId: number]: GraphPoolState }, poolState) => {
+      accum[poolState.poolId] = poolState
+      return accum
+    }, {})
+    : {}
+
+  const gaugePoolInfo = await getGaugePoolInfo(
+    Array.from({ length: Number(poolLength) }, (_, i) => i)
+      .filter(id => !!allPoolStatesMap[id]),
+    options,
+  )
+
+  // fetch old period data should update score from graph data
+  if (exactPeriodId < Number(currentPeriodId)) {
+    gaugePoolInfo.forEach((pool) => {
+      const graphPoolState = allPoolStatesMap[pool.pid]
+      pool.amount = graphPoolState?.totalAmount ?? '0'
+      pool.score = graphPoolState?.score ?? '0'
+    })
+  }
 
   const stablePoolInfos: GaugePoolInfo[] = []
   const standardPoolInfos: GaugePoolInfo[] = []
@@ -56,8 +82,9 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
     (totalScore, { score }) => JSBI.add(totalScore, JSBI.BigInt(score)), JSBI.BigInt(0),
   )
 
-  const gaugeRewards = await queryGaugeRewards(Number(currentPeriodId))
-  invariant(!!gaugeRewards, 'Cannot find gaugeRewards')
+  const gaugeRewards = await queryGaugeRewards(exactPeriodId)
+  if (!gaugeRewards)
+    throw new Error('Cannot find gaugeRewards')
 
   const rewardsDetails = gaugeRewards.rewards.map(({ token, amount }) => {
     const amountForStablePool = JSBI.divide(
@@ -175,6 +202,6 @@ export async function getGaugePoolInfo(
       lastRewardBlock: lastRewardBlock.toString(),
       startBlock: startBlock.toString(),
       claimableInterval: claimableInterval.toString(),
-    })),
+    })) as GaugePoolInfo[],
   )
 }

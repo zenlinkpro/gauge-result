@@ -48,6 +48,7 @@ export interface GaugeRewards {
 }
 
 export interface GaugeQueryOptions {
+  chainName: ChainName
   rpc: string
   ethereumChainId: EthereumChainId
   gaugeAddress: string
