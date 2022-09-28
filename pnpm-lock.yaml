@@ -24,6 +24,7 @@ importers:
     dependencies:
       '@apollo/client': registry.npmjs.org/@apollo/client/3.6.9_onqnqwb3ubg5opvemcqf7c2qhy
       '@wagmi/core': registry.npmjs.org/@wagmi/core/0.5.7_ethers@5.7.1+react@18.2.0
+      cross-fetch: registry.npmjs.org/cross-fetch/3.1.5
       ethers: registry.npmjs.org/ethers/5.7.1
       graphql: registry.npmjs.org/graphql/16.6.0
       jsbi: registry.npmjs.org/jsbi/4.3.0
@@ -32,7 +33,6 @@ importers:
       '@antfu/ni': registry.npmjs.org/@antfu/ni/0.18.0
       '@types/node': registry.npmjs.org/@types/node/18.7.23
       bumpp: registry.npmjs.org/bumpp/8.2.1
-      cross-fetch: registry.npmjs.org/cross-fetch/3.1.5
       eslint: registry.npmjs.org/eslint/8.24.0
       esno: registry.npmjs.org/esno/0.16.3
       pnpm: registry.npmjs.org/pnpm/7.12.2
@@ -1777,7 +1777,7 @@ packages:
       node-fetch: registry.npmjs.org/node-fetch/2.6.7
     transitivePeerDependencies:
       - encoding
-    dev: true
+    dev: false
 
   registry.npmjs.org/cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.3.tgz}
@@ -4072,7 +4072,7 @@ packages:
         optional: true
     dependencies:
       whatwg-url: registry.npmjs.org/whatwg-url/5.0.0
-    dev: true
+    dev: false
 
   registry.npmjs.org/node-releases/2.0.6:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/node-releases/-/node-releases-2.0.6.tgz}
@@ -4881,7 +4881,7 @@ packages:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/tr46/-/tr46-0.0.3.tgz}
     name: tr46
     version: 0.0.3
-    dev: true
+    dev: false
 
   registry.npmjs.org/ts-invariant/0.10.3:
     resolution: {integrity: sha512-uivwYcQaxAucv1CzRp2n/QdYPo4ILf9VXgH19zEIjFx2EJufV16P0JtJVpYHy89DItG6Kwj2oIUjrcK5au+4tQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/ts-invariant/-/ts-invariant-0.10.3.tgz}
@@ -5213,7 +5213,7 @@ packages:
     resolution: {integrity: sha512-2JAn3z8AR6rjK8Sm8orRC0h/bcl/DqL7tRPdGZ4I1CjdF+EaMLmYxBHyXuKL849eucPFhvBoxMsflfOb8kxaeQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/webidl-conversions/-/webidl-conversions-3.0.1.tgz}
     name: webidl-conversions
     version: 3.0.1
-    dev: true
+    dev: false
 
   registry.npmjs.org/whatwg-url/5.0.0:
     resolution: {integrity: sha512-saE57nupxk6v3HY35+jzBwYa0rKSy0XR8JSxZPwgLr7ys0IBzhGviA1/TUGJLmSVqs8pb9AnvICXEuOHLprYTw==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/whatwg-url/-/whatwg-url-5.0.0.tgz}
@@ -5222,7 +5222,7 @@ packages:
     dependencies:
       tr46: registry.npmjs.org/tr46/0.0.3
       webidl-conversions: registry.npmjs.org/webidl-conversions/3.0.1
-    dev: true
+    dev: false
 
   registry.npmjs.org/which-boxed-primitive/1.0.2:
     resolution: {integrity: sha512-bwZdv0AKLpplFY2KZRX6TvyuN7ojjr7lwkg6ml0roIy9YeuSr7JS372qlNW18UQYzgYK9ziGcerWqZOmEn9VNg==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/which-boxed-primitive/-/which-boxed-primitive-1.0.2.tgz}
