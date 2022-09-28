@@ -84,18 +84,7 @@ export async function fetchGraphGaugeData(
       totalScore: string
       timestamp: string
       updatedAt: string
-      allPoolStates: {
-        id: string
-        periodId: number
-        poolId: number
-        inherit: boolean
-        votable: boolean
-        resetVotable: boolean
-        totalAmount: string
-        score: string
-        timestamp: string
-        updatedAt: string
-      }[]
+      allPoolStates: GraphPoolState[]
     }[]
   } | null = null
 

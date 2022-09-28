@@ -2,12 +2,12 @@ import { generateGaugeInfo } from './utils/generateGaugeInfo'
 import { queryFoundationFarmingRate } from './utils/queryFoundationFarmingRate'
 import { queryProjectFarmingRate } from './utils/queryProjectFarmingRate'
 import { CHAIN_CONFIGS } from './config'
-import type { ChainName, FarmingRateResult } from './types'
+import type { ChainName, FarmingParametersResult } from './types'
 
 export async function generateFarmingParameters(
   chainName: ChainName,
   periodId?: number,
-): Promise<FarmingRateResult> {
+): Promise<FarmingParametersResult> {
   const {
     rpc,
     gaugeAddress,

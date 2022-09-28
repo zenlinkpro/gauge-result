@@ -34,16 +34,15 @@
     "dist"
   ],
   "scripts": {
-    "build": "unbuild",
+    "build": "nr generate:rewards && unbuild",
     "dev": "unbuild --stub",
     "lint": "eslint .",
     "lint:fix": "nr lint --fix",
     "release": "bumpp && npm publish",
-    "start": "esno src/index.ts",
+    "generate:rewards": "esno scripts/generate_rewards.ts && nr lint:fix",
     "typecheck": "tsc --noEmit",
-    "example:moonbase": "esno examples/fetchMoonbaseGauge.ts",
     "test": "vitest",
-    "test:ci": "nr build && nr typecheck && nr lint && nr test"
+    "test:ci": "nr build && nr typecheck && nr test"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
@@ -60,6 +59,8 @@
     "bumpp": "^8.2.1",
     "eslint": "^8.23.1",
     "esno": "^0.16.3",
+    "fast-glob": "^3.2.12",
+    "pathe": "^0.3.8",
     "pnpm": "^7.12.2",
     "tslib": "^2.4.0",
     "typescript": "^4.8.3",

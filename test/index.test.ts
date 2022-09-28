@@ -43,8 +43,8 @@ describe('chore', () => {
               },
               "rewards": [
                 {
-                  "amount": "313659",
-                  "token": "0x233",
+                  "amount": "62592838649530167",
+                  "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
                 },
               ],
             },
@@ -70,8 +70,8 @@ describe('chore', () => {
               },
               "rewards": [
                 {
-                  "amount": "87229",
-                  "token": "0x233",
+                  "amount": "17407161350469832",
+                  "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
                 },
               ],
             },
@@ -170,8 +170,8 @@ describe('chore', () => {
               },
               "rewards": [
                 {
-                  "amount": "400889",
-                  "token": "0x233",
+                  "amount": "80000000000000000",
+                  "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
                 },
               ],
             },

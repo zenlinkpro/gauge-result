@@ -31,12 +31,6 @@ export interface ChainConfig {
   farmingAddress: string
 }
 
-export enum RateType {
-  Gauge = 'Gauge',
-  Project = 'Project',
-  Foundation = 'Foundation',
-}
-
 export interface BasicReward {
   token: string
   amount: string
@@ -71,17 +65,12 @@ export interface GaugePoolInfo {
   claimableInterval: string
 }
 
-export interface QueryScoreParams {
-  multicallAddress: string
-  gaugeAddress: string
-  rpc: string
-}
-
 export interface ProjectRewards {
   pid: number
   token: string
   amount: number | string
 }
+
 export interface FoundationParam {
   gaugeAddress: string
   rpc: string
@@ -94,8 +83,8 @@ export interface ProjectParam {
   multicall: string
 }
 
-export interface FarmingRateResult {
-  chainName: string
+export interface FarmingParametersResult {
+  chainName: ChainName
   gaugeInfo: any
   projectInfo: any
   foundationInfo: any

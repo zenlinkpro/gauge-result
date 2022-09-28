@@ -2,7 +2,6 @@ import JSBI from 'jsbi'
 import type { BigNumber } from 'ethers'
 import { allChains, configureChains, createClient, readContract } from '@wagmi/core'
 import { publicProvider } from '@wagmi/core/providers/public'
-import { queryGaugeRewards } from '../rewards/gauge'
 import { STABLE_SHARE, TOTAL_SHARE } from '../constants'
 import gaugeABI from '../abis/gauge.json'
 import farmingABI from '../abis/farming.json'
@@ -10,6 +9,7 @@ import type { EthereumChainId, GaugePoolInfo, GaugeQueryOptions } from '../types
 import { chainsForWagmi } from '../config'
 import type { GraphPoolState } from '../graph/queries/gauge'
 import { fetchGraphGaugeData } from '../graph/queries/gauge'
+import { rewards as basicRewards } from '../rewards/basic'
 
 const { provider } = configureChains([...allChains, ...chainsForWagmi], [publicProvider()])
 createClient({ provider })
@@ -82,7 +82,7 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
     (totalScore, { score }) => JSBI.add(totalScore, JSBI.BigInt(score)), JSBI.BigInt(0),
   )
 
-  const gaugeRewards = await queryGaugeRewards(exactPeriodId)
+  const gaugeRewards = basicRewards[chainName].find(rewards => rewards.periodId === exactPeriodId)
   if (!gaugeRewards)
     throw new Error('Cannot find gaugeRewards')
 
