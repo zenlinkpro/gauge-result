@@ -4,6 +4,10 @@
 
 <p align='center'>
   <samp>Generate gauge result from provided chainName</samp>
+  <p align="center">
+    <a href="https://www.npmjs.com/package/@utkjs/farming-rate-query"></a>
+  <img src="https://img.shields.io/npm/v/@utkjs/farming-rate-query?color=c95f8b&amp;label=" alt="NPM version">
+  </p>
   <br>
   <br>
 </p>
