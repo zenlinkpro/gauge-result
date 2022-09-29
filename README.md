@@ -4,9 +4,11 @@
 
 <p align='center'>
   <samp>Generate gauge result from provided chainName</samp>
+  <br>
+  <br>
 </p>
 
-### Install as dependency
+## Install as dependency
 
 ```bash
 npm i @utkjs/farming-rate-query
@@ -14,6 +16,12 @@ npm i @utkjs/farming-rate-query
 
 ## Usage
 
+Generate rewards first if admin need to update config in 'src/rewards' (auto generate before build process)
+```bash
+pnpm run generate:rewards
+```
+
+Fetch results
 ```ts
 import { generateGaugeResult } from '@utkjs/farming-rate-query'
 
