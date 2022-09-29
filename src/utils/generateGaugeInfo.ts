@@ -134,6 +134,8 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
   })
 
   return {
+    exactPeriodId,
+    totalScore: JSBI.add(stablePoolTotalScore, standardPoolTotalScore).toString(),
     stablePoolTotalScore: stablePoolTotalScore.toString(),
     standardPoolTotalScore: standardPoolTotalScore.toString(),
     stablePoolInfos,

@@ -36,9 +36,18 @@ export interface BasicReward {
   amount: string
 }
 
+export interface RewardForPool extends BasicReward {
+  pid: number
+}
+
 export interface GaugeRewards {
   periodId: number
   rewards: BasicReward[]
+}
+
+export interface ExternalRewards {
+  periodId: number
+  rewards: RewardForPool[]
 }
 
 export interface GaugeQueryOptions {
@@ -65,28 +74,16 @@ export interface GaugePoolInfo {
   claimableInterval: string
 }
 
-export interface ProjectRewards {
-  pid: number
-  token: string
-  amount: number | string
-}
-
-export interface FoundationParam {
-  gaugeAddress: string
-  rpc: string
-  multicall: string
-}
-
-export interface ProjectParam {
-  gaugeAddress: string
-  rpc: string
-  multicall: string
-}
-
 export interface FarmingParametersResult {
   chainName: ChainName
-  gaugeInfo: any
-  projectInfo: any
-  foundationInfo: any
+  exactPeriodId: number
+  totalScore: string
+  standardPoolTotalScore: string
+  stablePoolTotalScore: string
+  allPoolInfos: GaugePoolInfo[]
+  allPoolRewards: {
+    pool: GaugePoolInfo
+    rewards: BasicReward[]
+  }[]
 }
 

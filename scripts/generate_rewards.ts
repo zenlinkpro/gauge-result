@@ -10,6 +10,8 @@ function capitalizeFirstLetter(s: string) {
 
 const dirs = [
   'basic',
+  'fundation',
+  'project',
 ]
 
 console.log()
