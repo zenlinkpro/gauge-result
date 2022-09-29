@@ -1,6 +1,6 @@
 // Auto generated
 
-export const rewards = {
+export const basicRewards = {
   Moonbase: [
     {
       periodId: 0,

@@ -27,6 +27,6 @@ for (const dir of dirs) {
     const code = await fs.readFile(file, 'utf8')
     configMap[chainName] = [...(configMap[chainName] || []), JSON.parse(code)]
   }
-  content = `// Auto generated\n\n export const rewards = ${JSON.stringify(configMap, null, 2)}`
+  content = `// Auto generated\n\n export const ${dir}Rewards = ${JSON.stringify(configMap, null, 2)}`
   await fs.writeFile(`src/rewards/${dir}/index.ts`, content, 'utf-8')
 }

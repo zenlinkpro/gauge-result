@@ -9,7 +9,7 @@ import type { EthereumChainId, GaugePoolInfo, GaugeQueryOptions } from '../types
 import { chainsForWagmi } from '../config'
 import type { GraphPoolState } from '../graph/queries/gauge'
 import { fetchGraphGaugeData } from '../graph/queries/gauge'
-import { rewards as basicRewards } from '../rewards/basic'
+import { basicRewards } from '../rewards'
 
 const { provider } = configureChains([...allChains, ...chainsForWagmi], [publicProvider()])
 createClient({ provider })
