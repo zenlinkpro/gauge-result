@@ -79,7 +79,7 @@ export interface ContractCallParameters {
   parameters: [number, string[], boolean]
 }
 
-export interface FarmingParametersResult {
+export interface GaugeResult {
   chainName: ChainName
   exactPeriodId: number
   totalScore: string

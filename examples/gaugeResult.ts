@@ -1,8 +1,8 @@
 /* eslint-disable no-console */
-import { generateFarmingParameters } from '../src'
+import { generateGaugeResult } from '../src'
 import { ChainName } from '../src/types'
 
-const result = await generateFarmingParameters(ChainName.Moonbase, {
+const result = await generateGaugeResult(ChainName.Moonbase, {
   generateContractCallParameters: true,
 })
 

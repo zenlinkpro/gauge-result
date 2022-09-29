@@ -4,15 +4,15 @@ import { CHAIN_CONFIGS } from './config'
 import type {
   ChainName,
   ContractCallParameters,
-  FarmingParametersResult,
+  GaugeResult,
   GenerateOptions,
 } from './types'
 import { generateFundationRewards, generateProjectRewards } from './utils/rewards'
 
-export async function generateFarmingParameters(
+export async function generateGaugeResult(
   chainName: ChainName,
   options?: GenerateOptions,
-): Promise<FarmingParametersResult> {
+): Promise<GaugeResult> {
   const {
     generateContractCallParameters = false,
     periodId,

@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest'
-import { generateFarmingParameters } from '../src'
+import { generateGaugeResult } from '../src'
 import { ChainName } from '../src/types'
 
 describe('chore', () => {
-  it('generate farming parameters from moonbase period 0', async () => {
+  it('generate gauge result from moonbase period 0', async () => {
     expect(
-      await generateFarmingParameters(ChainName.Moonbase, {
+      await generateGaugeResult(ChainName.Moonbase, {
         periodId: 0,
         generateContractCallParameters: true,
       }),
@@ -146,9 +146,9 @@ describe('chore', () => {
     `)
   })
 
-  it('generate farming parameters from moonbase period 1', async () => {
+  it('generate gauge result from moonbase period 1', async () => {
     expect(
-      await generateFarmingParameters(ChainName.Moonbase, {
+      await generateGaugeResult(ChainName.Moonbase, {
         periodId: 1,
       }),
     ).toMatchInlineSnapshot(`
@@ -213,8 +213,8 @@ describe('chore', () => {
     `)
   })
 
-  it('generate farming parameters from moonbase period 2', async () => {
-    expect(await generateFarmingParameters(ChainName.Moonbase)).toMatchInlineSnapshot(`
+  it('generate gauge result from moonbase period 2', async () => {
+    expect(await generateGaugeResult(ChainName.Moonbase)).toMatchInlineSnapshot(`
       {
         "allPoolInfos": [
           {
