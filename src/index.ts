@@ -57,15 +57,15 @@ export async function generateGaugeResult(
 
     if (fundationReward) {
       gaugePoolReward.rewards.push({
-        token: fundationReward.token,
-        amount: fundationReward.amount,
+        ...fundationReward,
+        type: fundationRewards!.type,
       })
     }
 
     if (projectReward) {
       gaugePoolReward.rewards.push({
-        token: projectReward.token,
-        amount: projectReward.amount,
+        ...projectReward,
+        type: projectRewards!.type,
       })
     }
   }
@@ -76,16 +76,18 @@ export async function generateGaugeResult(
     contractCallParameters = allPoolRewards.map(({ pool, rewards }) => {
       const { rewardTokens, pid } = pool
       const rewardPerBlock = rewardTokens.map((token) => {
-        const rewardInfos = rewards.filter(reward => reward.token.toLowerCase() === token.toLowerCase())
+        const rewardInfos = rewards.filter(reward =>
+          reward.token.toLowerCase() === token.toLowerCase(),
+        )
         return rewardInfos.length
-          ? rewardInfos.reduce(
-            (accum, info) => JSBI.add(accum, JSBI.BigInt(info.amount)),
-            JSBI.BigInt(0),
-          ).toString()
+          ? rewardInfos.reduce((accum, info) =>
+            JSBI.add(accum, JSBI.BigInt(info.amount)), JSBI.BigInt(0)).toString()
           : '0'
       })
+
       return {
         pid,
+        method: 'set',
         parameters: [pid, rewardPerBlock, true],
       }
     })

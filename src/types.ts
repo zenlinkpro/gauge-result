@@ -32,8 +32,10 @@ export interface ChainConfig {
 }
 
 export interface BasicReward {
+  type: string
   token: string
   amount: string
+  description: string
 }
 
 export interface RewardForPool extends BasicReward {
@@ -76,6 +78,7 @@ export interface GaugePoolInfo {
 
 export interface ContractCallParameters {
   pid: number
+  method: string
   parameters: [number, string[], boolean]
 }
 

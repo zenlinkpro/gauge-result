@@ -75,15 +75,23 @@ describe('chore', () => {
             "rewards": [
               {
                 "amount": "62592838649530167",
+                "description": "...",
                 "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+                "type": "basic",
               },
               {
                 "amount": "20000",
+                "description": "...",
+                "pid": 0,
                 "token": "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
+                "type": "fundation",
               },
               {
                 "amount": "30000000000000000",
+                "description": "...",
+                "pid": 0,
                 "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+                "type": "project",
               },
             ],
           },
@@ -110,7 +118,9 @@ describe('chore', () => {
             "rewards": [
               {
                 "amount": "17407161350469832",
+                "description": "...",
                 "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+                "type": "basic",
               },
             ],
           },
@@ -118,6 +128,7 @@ describe('chore', () => {
         "chainName": "Moonbase",
         "contractCallParameters": [
           {
+            "method": "set",
             "parameters": [
               0,
               [
@@ -128,6 +139,7 @@ describe('chore', () => {
             "pid": 0,
           },
           {
+            "method": "set",
             "parameters": [
               1,
               [
@@ -198,7 +210,9 @@ describe('chore', () => {
             "rewards": [
               {
                 "amount": "80000000000000000",
+                "description": "...",
                 "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+                "type": "basic",
               },
             ],
           },
@@ -261,7 +275,9 @@ describe('chore', () => {
             "rewards": [
               {
                 "amount": "80000000000000000",
+                "description": "...",
                 "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+                "type": "basic",
               },
             ],
           },

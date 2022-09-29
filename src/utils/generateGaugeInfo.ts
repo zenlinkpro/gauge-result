@@ -86,7 +86,7 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
   if (!gaugeRewards)
     throw new Error('Cannot find gaugeRewards')
 
-  const rewardsDetails = gaugeRewards.rewards.map(({ token, amount }) => {
+  const rewardsDetails = gaugeRewards.rewards.map(({ token, amount, description }) => {
     const amountForStablePool = JSBI.divide(
       JSBI.multiply(JSBI.BigInt(amount), JSBI.BigInt(STABLE_SHARE)),
       JSBI.BigInt(TOTAL_SHARE),
@@ -95,25 +95,31 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
 
     return {
       stableDetails: {
+        type: gaugeRewards.type,
         token,
         amount: amountForStablePool,
+        description,
       },
       standardDetails: {
+        type: gaugeRewards.type,
         token,
         amount: amountForStandardPool,
+        description,
       },
     }
   })
 
   const stableRewardsDetails = rewardsDetails.map(detail => detail.stableDetails)
   const stableGaugePoolRewards = stablePoolInfos.map((pool) => {
-    const rewards = stableRewardsDetails.map(({ token, amount }) => {
+    const rewards = stableRewardsDetails.map(({ token, amount, type, description }) => {
       return {
         token,
         amount: JSBI.divide(
           JSBI.multiply(JSBI.BigInt(amount), JSBI.BigInt(pool.score)),
           stablePoolTotalScore,
         ).toString(),
+        type,
+        description,
       }
     })
     return { rewards, pool }
@@ -121,13 +127,15 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
 
   const standardRewardsDetails = rewardsDetails.map(detail => detail.standardDetails)
   const standardGaugePoolRewards = standardPoolInfos.map((pool) => {
-    const rewards = standardRewardsDetails.map(({ token, amount }) => {
+    const rewards = standardRewardsDetails.map(({ token, amount, type, description }) => {
       return {
         token,
         amount: JSBI.divide(
           JSBI.multiply(JSBI.BigInt(amount), JSBI.BigInt(pool.score)),
           JSBI.BigInt(standardPoolTotalScore),
         ).toString(),
+        type,
+        description,
       }
     })
     return { rewards, pool }

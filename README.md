@@ -6,7 +6,7 @@
   <samp>Generate gauge result from provided chainName</samp>
   <p align="center">
     <a href="https://www.npmjs.com/package/@utkjs/farming-rate-query"></a>
-  <img src="https://img.shields.io/npm/v/@utkjs/farming-rate-query?color=c95f8b&amp;label=" alt="NPM version">
+  <img src="https://img.shields.io/npm/v/@utkjs/farming-rate-query?color=f20082&amp;label=" alt="NPM version">
   </p>
   <br>
   <br>
@@ -27,7 +27,7 @@ pnpm run generate:rewards
 
 Fetch results
 ```ts
-import { generateGaugeResult } from '@utkjs/farming-rate-query'
+import { ChainName, generateGaugeResult } from '@utkjs/farming-rate-query'
 
 // only fech result from current periodId
 const result1 = await generateGaugeResult(ChainName.Moonbase)
