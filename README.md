@@ -26,7 +26,7 @@ const result2 = await generateGaugeResult(ChainName.Moonbase, {
 })
 
 // fetch result from specific periodId and get contract call parameters
-const result2 = await generateGaugeResult(ChainName.Moonbase, {
+const result3 = await generateGaugeResult(ChainName.Moonbase, {
   periodId: 0,
   generateContractCallParameters: true
 })
