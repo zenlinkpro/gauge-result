@@ -74,6 +74,11 @@ export interface GaugePoolInfo {
   claimableInterval: string
 }
 
+export interface ContractCallParameters {
+  pid: number
+  parameters: [number, string[], boolean]
+}
+
 export interface FarmingParametersResult {
   chainName: ChainName
   exactPeriodId: number
@@ -85,5 +90,10 @@ export interface FarmingParametersResult {
     pool: GaugePoolInfo
     rewards: BasicReward[]
   }[]
+  contractCallParameters: ContractCallParameters[] | null
 }
 
+export interface GenerateOptions {
+  periodId?: number
+  generateContractCallParameters?: boolean
+}

@@ -1,12 +1,23 @@
+import JSBI from 'jsbi'
 import { generateGaugeInfo } from './utils/generateGaugeInfo'
 import { CHAIN_CONFIGS } from './config'
-import type { ChainName, FarmingParametersResult } from './types'
+import type {
+  ChainName,
+  ContractCallParameters,
+  FarmingParametersResult,
+  GenerateOptions,
+} from './types'
 import { generateFundationRewards, generateProjectRewards } from './utils/rewards'
 
 export async function generateFarmingParameters(
   chainName: ChainName,
-  periodId?: number,
+  options?: GenerateOptions,
 ): Promise<FarmingParametersResult> {
+  const {
+    generateContractCallParameters = false,
+    periodId,
+  } = options || {}
+
   const {
     rpc,
     gaugeAddress,
@@ -37,7 +48,8 @@ export async function generateFarmingParameters(
   const fundationRewards = generateFundationRewards(chainName, exactPeriodId)
   const projectRewards = generateProjectRewards(chainName, exactPeriodId)
 
-  for (const gaugePoolReward of [...standardGaugePoolRewards, ...stableGaugePoolRewards]) {
+  const allPoolRewards = [...standardGaugePoolRewards, ...stableGaugePoolRewards]
+  for (const gaugePoolReward of allPoolRewards) {
     const fundationReward = fundationRewards?.rewards
       .find(reward => reward.pid === gaugePoolReward.pool.pid)
     const projectReward = projectRewards?.rewards
@@ -58,6 +70,27 @@ export async function generateFarmingParameters(
     }
   }
 
+  let contractCallParameters: ContractCallParameters[] | null = null
+
+  if (generateContractCallParameters) {
+    contractCallParameters = allPoolRewards.map(({ pool, rewards }) => {
+      const { rewardTokens, pid } = pool
+      const rewardPerBlock = rewardTokens.map((token) => {
+        const rewardInfos = rewards.filter(reward => reward.token.toLowerCase() === token.toLowerCase())
+        return rewardInfos.length
+          ? rewardInfos.reduce(
+            (accum, info) => JSBI.add(accum, JSBI.BigInt(info.amount)),
+            JSBI.BigInt(0),
+          ).toString()
+          : '0'
+      })
+      return {
+        pid,
+        parameters: [pid, rewardPerBlock, true],
+      }
+    })
+  }
+
   return {
     chainName,
     exactPeriodId,
@@ -65,6 +98,7 @@ export async function generateFarmingParameters(
     standardPoolTotalScore,
     stablePoolTotalScore,
     allPoolInfos: [...standardPoolInfos, ...stablePoolInfos],
-    allPoolRewards: [...standardGaugePoolRewards, ...stableGaugePoolRewards],
+    allPoolRewards,
+    contractCallParameters,
   }
 }

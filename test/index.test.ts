@@ -4,7 +4,12 @@ import { ChainName } from '../src/types'
 
 describe('chore', () => {
   it('generate farming parameters from moonbase period 0', async () => {
-    expect(await generateFarmingParameters(ChainName.Moonbase, 0)).toMatchInlineSnapshot(`
+    expect(
+      await generateFarmingParameters(ChainName.Moonbase, {
+        periodId: 0,
+        generateContractCallParameters: true,
+      }),
+    ).toMatchInlineSnapshot(`
       {
         "allPoolInfos": [
           {
@@ -73,8 +78,8 @@ describe('chore', () => {
                 "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
               },
               {
-                "amount": "20000000000000000",
-                "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+                "amount": "20000",
+                "token": "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
               },
               {
                 "amount": "30000000000000000",
@@ -111,6 +116,28 @@ describe('chore', () => {
           },
         ],
         "chainName": "Moonbase",
+        "contractCallParameters": [
+          {
+            "parameters": [
+              0,
+              [
+                "20000",
+              ],
+              true,
+            ],
+            "pid": 0,
+          },
+          {
+            "parameters": [
+              1,
+              [
+                "0",
+              ],
+              true,
+            ],
+            "pid": 1,
+          },
+        ],
         "exactPeriodId": 0,
         "stablePoolTotalScore": "0",
         "standardPoolTotalScore": "146307600000000000000",
@@ -118,8 +145,76 @@ describe('chore', () => {
       }
     `)
   })
+
+  it('generate farming parameters from moonbase period 1', async () => {
+    expect(
+      await generateFarmingParameters(ChainName.Moonbase, {
+        periodId: 1,
+      }),
+    ).toMatchInlineSnapshot(`
+      {
+        "allPoolInfos": [
+          {
+            "accRewardPerShare": [
+              "0",
+            ],
+            "amount": "122000000000000000000",
+            "claimableInterval": "100",
+            "farmingToken": "0xA82e5eF8Ca4670a59129aB09Af5c895D5712Fa3b",
+            "lastRewardBlock": "2834954",
+            "pid": 0,
+            "rewardPerBlock": [
+              "1",
+            ],
+            "rewardTokens": [
+              "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
+            ],
+            "score": "122000000000000000000",
+            "stable": false,
+            "startBlock": "2834954",
+          },
+        ],
+        "allPoolRewards": [
+          {
+            "pool": {
+              "accRewardPerShare": [
+                "0",
+              ],
+              "amount": "122000000000000000000",
+              "claimableInterval": "100",
+              "farmingToken": "0xA82e5eF8Ca4670a59129aB09Af5c895D5712Fa3b",
+              "lastRewardBlock": "2834954",
+              "pid": 0,
+              "rewardPerBlock": [
+                "1",
+              ],
+              "rewardTokens": [
+                "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
+              ],
+              "score": "122000000000000000000",
+              "stable": false,
+              "startBlock": "2834954",
+            },
+            "rewards": [
+              {
+                "amount": "80000000000000000",
+                "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+              },
+            ],
+          },
+        ],
+        "chainName": "Moonbase",
+        "contractCallParameters": null,
+        "exactPeriodId": 1,
+        "stablePoolTotalScore": "0",
+        "standardPoolTotalScore": "122000000000000000000",
+        "totalScore": "122000000000000000000",
+      }
+    `)
+  })
+
   it('generate farming parameters from moonbase period 2', async () => {
-    expect(await generateFarmingParameters(ChainName.Moonbase, 2)).toMatchInlineSnapshot(`
+    expect(await generateFarmingParameters(ChainName.Moonbase)).toMatchInlineSnapshot(`
       {
         "allPoolInfos": [
           {
@@ -172,6 +267,7 @@ describe('chore', () => {
           },
         ],
         "chainName": "Moonbase",
+        "contractCallParameters": null,
         "exactPeriodId": 2,
         "stablePoolTotalScore": "0",
         "standardPoolTotalScore": "256000000000000000000",
