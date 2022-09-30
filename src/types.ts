@@ -90,6 +90,7 @@ export interface GaugeResult {
   stablePoolTotalScore: string
   allPoolInfos: GaugePoolInfo[]
   allPoolRewards: {
+    pid: number
     pool: GaugePoolInfo
     rewards: BasicReward[]
   }[]

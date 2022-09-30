@@ -122,7 +122,12 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
         description,
       }
     })
-    return { rewards, pool }
+
+    return {
+      pid: pool.pid,
+      rewards,
+      pool,
+    }
   })
 
   const standardRewardsDetails = rewardsDetails.map(detail => detail.standardDetails)
@@ -138,7 +143,12 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
         description,
       }
     })
-    return { rewards, pool }
+
+    return {
+      pid: pool.pid,
+      rewards,
+      pool,
+    }
   })
 
   return {

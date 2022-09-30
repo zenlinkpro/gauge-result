@@ -53,6 +53,7 @@ describe('chore', () => {
         ],
         "allPoolRewards": [
           {
+            "pid": 0,
             "pool": {
               "accRewardPerShare": [
                 "0",
@@ -96,6 +97,7 @@ describe('chore', () => {
             ],
           },
           {
+            "pid": 1,
             "pool": {
               "accRewardPerShare": [
                 "0",
@@ -188,6 +190,7 @@ describe('chore', () => {
         ],
         "allPoolRewards": [
           {
+            "pid": 0,
             "pool": {
               "accRewardPerShare": [
                 "0",
@@ -253,6 +256,7 @@ describe('chore', () => {
         ],
         "allPoolRewards": [
           {
+            "pid": 0,
             "pool": {
               "accRewardPerShare": [
                 "0",
