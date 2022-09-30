@@ -20,14 +20,14 @@ export const CHAIN_CONFIGS = {
 export const chainsForWagmi = [
   {
     id: EthereumChainId.Moonbase,
-    name: 'Moonbase',
-    network: 'moonbase',
+    name: ChainName.Moonbase,
+    network: ChainName.Moonbase.toLowerCase(),
     nativeCurrency: { name: 'Moonbase-dev', symbol: 'DEV', decimals: 18 },
     rpcUrls: {
-      default: 'https://rpc.api.moonbase.moonbeam.network',
+      default: MOONBASE_CHAIN_CONFIG.rpc,
     },
     multicall: {
-      address: '0xa319aAb7b9578c2CdEe4EE9e4FFE5B5c48157cA3',
+      address: MOONBASE_CHAIN_CONFIG.multicallAddress,
       blockCreated: 1207735,
     },
   },

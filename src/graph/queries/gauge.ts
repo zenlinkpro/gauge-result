@@ -71,23 +71,7 @@ export async function fetchGraphGaugeData(
   gaugeAddress: string,
   periodId: number,
 ) {
-  let data: {
-    id: string
-    voteToken: string
-    timestamp: string
-    updatedAt: string
-    periodStates: {
-      id: string
-      start: string
-      end: string
-      totalAmount: string
-      totalScore: string
-      timestamp: string
-      updatedAt: string
-      allPoolStates: GraphPoolState[]
-    }[]
-  } | null = null
-
+  let data: GaugeGraphResult['gaugeById'] | null = null
   let error = false
 
   try {
