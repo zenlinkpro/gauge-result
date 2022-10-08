@@ -7,7 +7,6 @@ importers:
       '@antfu/eslint-config': ^0.27.0
       '@antfu/ni': ^0.18.0
       '@apollo/client': ^3.6.9
-      '@types/node': ^18.7.18
       '@wagmi/core': ^0.5.7
       '@zenlink-dex/zenlink-evm-contracts': ^0.0.1
       bumpp: ^8.2.1
@@ -20,7 +19,6 @@ importers:
       jsbi: ^4.3.0
       pathe: ^0.3.8
       pnpm: ^7.12.2
-      tslib: ^2.4.0
       typescript: ^4.8.3
       unbuild: ^0.8.11
       vitest: ^0.23.4
@@ -35,14 +33,12 @@ importers:
     devDependencies:
       '@antfu/eslint-config': registry.npmjs.org/@antfu/eslint-config/0.27.0_z4bbprzjrhnsfa24uvmcbu7f5q
       '@antfu/ni': registry.npmjs.org/@antfu/ni/0.18.2
-      '@types/node': registry.npmjs.org/@types/node/18.8.3
       bumpp: registry.npmjs.org/bumpp/8.2.1
       eslint: registry.npmjs.org/eslint/8.25.0
       esno: registry.npmjs.org/esno/0.16.3
       fast-glob: registry.npmjs.org/fast-glob/3.2.12
       pathe: registry.npmjs.org/pathe/0.3.9
       pnpm: registry.npmjs.org/pnpm/7.13.2
-      tslib: registry.npmjs.org/tslib/2.4.0
       typescript: registry.npmjs.org/typescript/4.8.4
       unbuild: registry.npmjs.org/unbuild/0.8.11
       vitest: registry.npmjs.org/vitest/0.23.4
@@ -4948,6 +4944,7 @@ packages:
     resolution: {integrity: sha512-d6xOpEDfsi2CZVlPQzGeux8XMwLT9hssAsaPYExaQMuYskwb+x1x7J371tWlbBdWHroy99KnVB6qIkUbs5X3UQ==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/tslib/-/tslib-2.4.0.tgz}
     name: tslib
     version: 2.4.0
+    dev: false
 
   registry.npmjs.org/tsutils/3.21.0_typescript@4.8.4:
     resolution: {integrity: sha512-mHKK3iUXL+3UF6xL5k0PEhKRUBKPBCv/+RkEOpjRWxxx27KKRBmmA60A9pgOUvMi8GKhRMPEmjBRPzs2W7O1OA==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/tsutils/-/tsutils-3.21.0.tgz}
