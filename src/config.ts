@@ -8,7 +8,7 @@ export const MOONBASE_CHAIN_CONFIG: ChainConfig = {
   chainName: ChainName.Moonbase,
   rpc: 'https://rpc.api.moonbase.moonbeam.network',
   graphqlEndpoint: 'https://squid.subsquid.io/zenlink-moonbase-squid/graphql',
-  multicallAddress: '0xC0B5F0c076435C8c65470353856fd4Cf9B43d195',
+  multicallAddress: '0xcA11bde05977b3631167028862bE2a173976CA11',
   gaugeAddress: '0xA12e750486A6edfA30AEaF168AED6689E2c09913',
   farmingAddress: '0x7291df5772AfCbCB937b3c45723Cd384d39A3CC7',
 }
