@@ -1,5 +1,12 @@
 import JSBI from 'jsbi'
-import { allChains, configureChains, createClient, readContract } from '@wagmi/core'
+import type { ReadContractsConfig } from '@wagmi/core'
+import {
+  allChains,
+  configureChains,
+  createClient,
+  readContract,
+  readContracts,
+} from '@wagmi/core'
 import { publicProvider } from '@wagmi/core/providers/public'
 import type { Farming, Gauge } from '@zenlink-dex/zenlink-evm-contracts'
 import gaugeABI from '@zenlink-dex/zenlink-evm-contracts/abi/Gauge.json'
@@ -188,40 +195,38 @@ export async function getGaugePoolInfo(
   options: GaugeQueryOptions,
 ) {
   const { gaugeAddress, ethereumChainId } = options
-  return Promise.all(
-    pids.map(pid =>
-      readContract<Gauge, ReturnType<Gauge['getPoolInfo']>>({
-        addressOrName: gaugeAddress,
-        functionName: 'getPoolInfo',
-        args: [pid],
-        chainId: ethereumChainId,
-        contractInterface: gaugeABI,
-      }),
-    ),
-  ).then(results =>
-    results.map(({
-      score,
-      stable,
-      farmingToken,
-      amount,
-      rewardTokens,
-      rewardPerBlock,
-      accRewardPerShare,
-      lastRewardBlock,
-      startBlock,
-      claimableInterval,
-    }, i) => ({
-      pid: pids[i],
-      score: score.toString(),
-      stable,
-      farmingToken,
-      amount: amount.toString(),
-      rewardTokens,
-      rewardPerBlock: rewardPerBlock.map(reward => reward.toString()),
-      accRewardPerShare: accRewardPerShare.map(share => share.toString()),
-      lastRewardBlock: lastRewardBlock.toString(),
-      startBlock: startBlock.toString(),
-      claimableInterval: claimableInterval.toString(),
-    })),
-  )
+  const contracts: ReadContractsConfig['contracts'] = pids.map(pid => ({
+    addressOrName: gaugeAddress,
+    functionName: 'getPoolInfo',
+    args: [pid],
+    chainId: ethereumChainId,
+    contractInterface: gaugeABI,
+  }))
+  const results = await readContracts<Awaited<ReturnType<Gauge['getPoolInfo']>>[]>({
+    contracts,
+  })
+  return results.map(({
+    score,
+    stable,
+    farmingToken,
+    amount,
+    rewardTokens,
+    rewardPerBlock,
+    accRewardPerShare,
+    lastRewardBlock,
+    startBlock,
+    claimableInterval,
+  }, i) => ({
+    pid: pids[i],
+    score: score.toString(),
+    stable,
+    farmingToken,
+    amount: amount.toString(),
+    rewardTokens,
+    rewardPerBlock: rewardPerBlock.map(reward => reward.toString()),
+    accRewardPerShare: accRewardPerShare.map(share => share.toString()),
+    lastRewardBlock: lastRewardBlock.toString(),
+    startBlock: startBlock.toString(),
+    claimableInterval: claimableInterval.toString(),
+  }))
 }
