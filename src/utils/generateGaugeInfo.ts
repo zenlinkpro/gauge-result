@@ -1,10 +1,10 @@
 import JSBI from 'jsbi'
-import type { BigNumber } from 'ethers'
 import { allChains, configureChains, createClient, readContract } from '@wagmi/core'
 import { publicProvider } from '@wagmi/core/providers/public'
+import type { Farming, Gauge } from '@zenlink-dex/zenlink-evm-contracts'
+import gaugeABI from '@zenlink-dex/zenlink-evm-contracts/abi/Gauge.json'
+import farmingABI from '@zenlink-dex/zenlink-evm-contracts/abi/Farming.json'
 import { STABLE_SHARE, TOTAL_SHARE } from '../constants'
-import gaugeABI from '../abis/gauge.json'
-import farmingABI from '../abis/farming.json'
 import type { EthereumChainId, GaugePoolInfo, GaugeQueryOptions } from '../types'
 import { chainsForWagmi } from '../config'
 import type { GraphPoolState } from '../graph/queries/gauge'
@@ -164,7 +164,7 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
 }
 
 async function getCurrentPeriodId(contract: string, chainId: EthereumChainId) {
-  return (await readContract({
+  return (await readContract<Gauge, ReturnType<Gauge['getCurrentPeriodId']>>({
     addressOrName: contract,
     functionName: 'getCurrentPeriodId',
     args: [],
@@ -174,7 +174,7 @@ async function getCurrentPeriodId(contract: string, chainId: EthereumChainId) {
 }
 
 async function getFarmingPoolLength(contract: string, chainId: EthereumChainId) {
-  return (await readContract({
+  return (await readContract<Farming, ReturnType<Farming['poolLength']>>({
     addressOrName: contract,
     functionName: 'poolLength',
     args: [],
@@ -190,7 +190,7 @@ export async function getGaugePoolInfo(
   const { gaugeAddress, ethereumChainId } = options
   return Promise.all(
     pids.map(pid =>
-      readContract({
+      readContract<Gauge, ReturnType<Gauge['getPoolInfo']>>({
         addressOrName: gaugeAddress,
         functionName: 'getPoolInfo',
         args: [pid],
@@ -217,11 +217,11 @@ export async function getGaugePoolInfo(
       farmingToken,
       amount: amount.toString(),
       rewardTokens,
-      rewardPerBlock: rewardPerBlock.map((reward: BigNumber) => reward.toString()),
-      accRewardPerShare: accRewardPerShare.map((share: BigNumber) => share.toString()),
+      rewardPerBlock: rewardPerBlock.map(reward => reward.toString()),
+      accRewardPerShare: accRewardPerShare.map(share => share.toString()),
       lastRewardBlock: lastRewardBlock.toString(),
       startBlock: startBlock.toString(),
       claimableInterval: claimableInterval.toString(),
-    })) as GaugePoolInfo[],
+    })),
   )
 }
