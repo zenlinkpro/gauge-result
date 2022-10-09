@@ -23,7 +23,6 @@ for (const dir of dirs) {
     absolute: true,
   })
   const configMap: { [chainName: string]: GaugeRewards[] } = {}
-  let content = ''
   for (const file of files) {
     const paths = dirname(file).split('/')
     const chainName = capitalizeFirstLetter(paths[paths.length - 1])
@@ -36,9 +35,12 @@ for (const dir of dirs) {
       },
     ]
   }
-  content = `// Auto generated\n\n export const ${dir}Rewards = ${JSON.stringify(configMap, null, 2)}`
   const targetFile = `src/rewards/${dir}/index.ts`
-  await fs.writeFile(targetFile, content, 'utf-8')
+  await fs.writeFile(
+    targetFile,
+    `// Auto generated\n\n export const ${dir}Rewards = ${JSON.stringify(configMap, null, 2)}`,
+    'utf-8',
+  )
 
   const eslint = new ESLint({
     fix: true,
