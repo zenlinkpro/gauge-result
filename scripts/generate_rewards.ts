@@ -1,6 +1,7 @@
 import fs from 'fs/promises'
 import { dirname } from 'pathe'
 import fg from 'fast-glob'
+import { ESLint } from 'eslint'
 import { version } from '../package.json'
 import type { GaugeRewards } from '../src/types'
 
@@ -36,5 +37,14 @@ for (const dir of dirs) {
     ]
   }
   content = `// Auto generated\n\n export const ${dir}Rewards = ${JSON.stringify(configMap, null, 2)}`
-  await fs.writeFile(`src/rewards/${dir}/index.ts`, content, 'utf-8')
+  const targetFile = `src/rewards/${dir}/index.ts`
+  await fs.writeFile(targetFile, content, 'utf-8')
+
+  const eslint = new ESLint({
+    fix: true,
+  })
+  const results = await eslint.lintFiles([targetFile])
+  await ESLint.outputFixes(results)
+  const formatter = await eslint.loadFormatter('stylish')
+  formatter.format(results)
 }

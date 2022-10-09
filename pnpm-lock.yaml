@@ -7,6 +7,7 @@ importers:
       '@antfu/eslint-config': ^0.27.0
       '@antfu/ni': ^0.18.0
       '@apollo/client': ^3.6.9
+      '@types/eslint': ^8.4.6
       '@wagmi/core': ^0.5.7
       '@zenlink-dex/zenlink-evm-contracts': ^0.0.1
       bumpp: ^8.2.1
@@ -33,6 +34,7 @@ importers:
     devDependencies:
       '@antfu/eslint-config': registry.npmjs.org/@antfu/eslint-config/0.27.0_z4bbprzjrhnsfa24uvmcbu7f5q
       '@antfu/ni': registry.npmjs.org/@antfu/ni/0.18.2
+      '@types/eslint': registry.npmjs.org/@types/eslint/8.4.6
       bumpp: registry.npmjs.org/bumpp/8.2.1
       eslint: registry.npmjs.org/eslint/8.25.0
       esno: registry.npmjs.org/esno/0.16.3
@@ -1132,6 +1134,15 @@ packages:
     resolution: {integrity: sha512-hC7OMnszpxhZPduX+m+nrx+uFoLkWOMiR4oa/AZF3MuSETYTZmFfJAHqZEM8MVlvfG7BEUcgvtwoCTxBp6hm3g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@types/chai/-/chai-4.3.3.tgz}
     name: '@types/chai'
     version: 4.3.3
+    dev: true
+
+  registry.npmjs.org/@types/eslint/8.4.6:
+    resolution: {integrity: sha512-/fqTbjxyFUaYNO7VcW5g+4npmqVACz1bB7RTHYuLj+PRjw9hrCwrUXVQFpChUS0JsyEFvMZ7U/PfmvWgxJhI9g==, registry: https://registry.yarnpkg.com/, tarball: https://registry.npmjs.org/@types/eslint/-/eslint-8.4.6.tgz}
+    name: '@types/eslint'
+    version: 8.4.6
+    dependencies:
+      '@types/estree': registry.npmjs.org/@types/estree/1.0.0
+      '@types/json-schema': registry.npmjs.org/@types/json-schema/7.0.11
     dev: true
 
   registry.npmjs.org/@types/estree/0.0.39:
