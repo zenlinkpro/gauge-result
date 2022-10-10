@@ -41,7 +41,9 @@
     "release": "bumpp",
     "generate:rewards": "esno scripts/generate_rewards.ts",
     "typecheck": "tsc --noEmit",
-    "test": "vitest",
+    "test": "vitest run",
+    "test:ui": "vitest --ui",
+    "test:update": "vitest --update",
     "test:ci": "nr build && nr typecheck && nr lint && nr test"
   },
   "dependencies": {
@@ -57,6 +59,7 @@
     "@antfu/eslint-config": "^0.27.0",
     "@antfu/ni": "^0.18.0",
     "@types/eslint": "^8.4.6",
+    "@vitest/ui": "^0.24.0",
     "bumpp": "^8.2.1",
     "eslint": "^8.23.1",
     "esno": "^0.16.3",
