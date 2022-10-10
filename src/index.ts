@@ -9,6 +9,9 @@ import type {
 } from './types'
 import { generateFundationRewards, generateProjectRewards } from './utils/rewards'
 
+export * from './types'
+export { CHAIN_CONFIGS }
+
 export async function generateGaugeResult(
   chainName: ChainName,
   options?: GenerateOptions,
@@ -104,5 +107,3 @@ export async function generateGaugeResult(
     contractCallParameters,
   }
 }
-
-export { ChainName, CHAIN_CONFIGS }
