@@ -104,3 +104,5 @@ export async function generateGaugeResult(
     contractCallParameters,
   }
 }
+
+export { ChainName, CHAIN_CONFIGS }
