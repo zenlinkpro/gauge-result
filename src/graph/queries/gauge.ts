@@ -7,8 +7,6 @@ export const GAUGE_FETCH = gql`
     gaugeById(id: $id) {
       id
       voteToken
-      timestamp
-      updatedAt
       periodStates(where: { id_eq: $periodId }, limit: 1) {
         id
         start
@@ -51,8 +49,6 @@ interface GaugeGraphResult {
   gaugeById: {
     id: string
     voteToken: string
-    timestamp: string
-    updatedAt: string
     periodStates: {
       id: string
       start: string

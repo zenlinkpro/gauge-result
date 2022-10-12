@@ -65,8 +65,6 @@ describe('graph', () => {
                 "updatedAt": "2022-09-19T07:45:54.318000Z",
               },
             ],
-            "timestamp": "1665557130056",
-            "updatedAt": "2022-10-12T06:45:30.056000Z",
             "voteToken": "0xb38188fedff30bec23aef5c691ab647756771ff1",
           },
           "error": false,
