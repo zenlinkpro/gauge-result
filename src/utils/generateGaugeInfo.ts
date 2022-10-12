@@ -17,6 +17,7 @@ import { chainsForWagmi } from '../config'
 import type { GraphPoolState } from '../graph/queries/gauge'
 import { fetchGraphGaugeData } from '../graph/queries/gauge'
 import { basicRewards } from '../rewards'
+import { GaugeRewardsNotFoundError } from '../errors'
 
 const { provider } = configureChains([...allChains, ...chainsForWagmi], [publicProvider()])
 createClient({ provider })
@@ -29,6 +30,7 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
     farmingAddress,
     ethereumChainId,
   } = options
+  let error: Error | undefined
 
   const [currentPeriodId, poolLength] = await Promise.all([
     getCurrentPeriodId(gaugeAddress, ethereumChainId),
@@ -91,9 +93,9 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
 
   const gaugeRewards = basicRewards[chainName].find(rewards => rewards.periodId === exactPeriodId)
   if (!gaugeRewards)
-    throw new Error('Cannot find gaugeRewards')
+    error = new GaugeRewardsNotFoundError(exactPeriodId)
 
-  const rewardsDetails = gaugeRewards.rewards.map(({ token, amount, description }) => {
+  const rewardsDetails = gaugeRewards?.rewards.map(({ token, amount, description }) => {
     const amountForStablePool = JSBI.divide(
       JSBI.multiply(JSBI.BigInt(amount), JSBI.BigInt(STABLE_SHARE)),
       JSBI.BigInt(TOTAL_SHARE),
@@ -114,7 +116,7 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
         description,
       },
     }
-  })
+  }) || []
 
   const stableRewardsDetails = rewardsDetails.map(detail => detail.stableDetails)
   const stableGaugePoolRewards = stablePoolInfos.map((pool) => {
@@ -160,6 +162,7 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
 
   return {
     exactPeriodId,
+    error,
     totalScore: JSBI.add(stablePoolTotalScore, standardPoolTotalScore).toString(),
     stablePoolTotalScore: stablePoolTotalScore.toString(),
     standardPoolTotalScore: standardPoolTotalScore.toString(),

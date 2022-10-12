@@ -31,6 +31,7 @@ export async function generateGaugeResult(
 
   const {
     exactPeriodId,
+    error,
     stablePoolInfos,
     standardPoolInfos,
     stablePoolTotalScore,
@@ -97,6 +98,7 @@ export async function generateGaugeResult(
   }
 
   return {
+    error,
     chainName,
     exactPeriodId,
     totalScore,

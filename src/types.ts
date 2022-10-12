@@ -83,6 +83,7 @@ export interface ContractCallParameters {
 }
 
 export interface GaugeResult {
+  error?: Error
   chainName: ChainName
   exactPeriodId: number
   totalScore: string

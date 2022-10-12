@@ -152,6 +152,7 @@ describe('chore', () => {
             "pid": 1,
           },
         ],
+        "error": undefined,
         "exactPeriodId": 0,
         "stablePoolTotalScore": "0",
         "standardPoolTotalScore": "146307600000000000000",
@@ -222,6 +223,7 @@ describe('chore', () => {
         ],
         "chainName": "Moonbase",
         "contractCallParameters": null,
+        "error": undefined,
         "exactPeriodId": 1,
         "stablePoolTotalScore": "0",
         "standardPoolTotalScore": "122000000000000000000",
@@ -249,7 +251,7 @@ describe('chore', () => {
             "rewardTokens": [
               "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
             ],
-            "score": "256000000000000000000",
+            "score": "356000000000000000000",
             "stable": false,
             "startBlock": "2834954",
           },
@@ -272,7 +274,7 @@ describe('chore', () => {
               "rewardTokens": [
                 "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
               ],
-              "score": "256000000000000000000",
+              "score": "356000000000000000000",
               "stable": false,
               "startBlock": "2834954",
             },
@@ -288,10 +290,11 @@ describe('chore', () => {
         ],
         "chainName": "Moonbase",
         "contractCallParameters": null,
-        "exactPeriodId": 2,
+        "error": undefined,
+        "exactPeriodId": 3,
         "stablePoolTotalScore": "0",
-        "standardPoolTotalScore": "256000000000000000000",
-        "totalScore": "256000000000000000000",
+        "standardPoolTotalScore": "356000000000000000000",
+        "totalScore": "356000000000000000000",
       }
     `)
   })

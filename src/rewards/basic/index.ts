@@ -35,5 +35,27 @@ export const basicRewards = {
       ],
       type: 'basic',
     },
+    {
+      periodId: 3,
+      rewards: [
+        {
+          description: '...',
+          token: '0xB5989e3Eb10bBe04b962586910C0bBC1238baD78',
+          amount: '100000000000000000',
+        },
+      ],
+      type: 'basic',
+    },
+    {
+      periodId: 4,
+      rewards: [
+        {
+          description: '...',
+          token: '0xB5989e3Eb10bBe04b962586910C0bBC1238baD78',
+          amount: '100000000000000000',
+        },
+      ],
+      type: 'basic',
+    },
   ],
 }
