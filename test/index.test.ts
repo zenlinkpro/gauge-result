@@ -233,14 +233,18 @@ describe('chore', () => {
   })
 
   it('generate gauge result from moonbase period 2', async () => {
-    expect(await generateGaugeResult(ChainName.Moonbase)).toMatchInlineSnapshot(`
+    expect(
+      await generateGaugeResult(ChainName.Moonbase, {
+        periodId: 2,
+      }),
+    ).toMatchInlineSnapshot(`
       {
         "allPoolInfos": [
           {
             "accRewardPerShare": [
               "0",
             ],
-            "amount": "0",
+            "amount": "256000000000000000000",
             "claimableInterval": "100",
             "farmingToken": "0xA82e5eF8Ca4670a59129aB09Af5c895D5712Fa3b",
             "lastRewardBlock": "2834954",
@@ -251,7 +255,7 @@ describe('chore', () => {
             "rewardTokens": [
               "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
             ],
-            "score": "356000000000000000000",
+            "score": "256000000000000000000",
             "stable": false,
             "startBlock": "2834954",
           },
@@ -263,7 +267,7 @@ describe('chore', () => {
               "accRewardPerShare": [
                 "0",
               ],
-              "amount": "0",
+              "amount": "256000000000000000000",
               "claimableInterval": "100",
               "farmingToken": "0xA82e5eF8Ca4670a59129aB09Af5c895D5712Fa3b",
               "lastRewardBlock": "2834954",
@@ -274,7 +278,7 @@ describe('chore', () => {
               "rewardTokens": [
                 "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
               ],
-              "score": "356000000000000000000",
+              "score": "256000000000000000000",
               "stable": false,
               "startBlock": "2834954",
             },
@@ -291,10 +295,10 @@ describe('chore', () => {
         "chainName": "Moonbase",
         "contractCallParameters": null,
         "error": undefined,
-        "exactPeriodId": 3,
+        "exactPeriodId": 2,
         "stablePoolTotalScore": "0",
-        "standardPoolTotalScore": "356000000000000000000",
-        "totalScore": "356000000000000000000",
+        "standardPoolTotalScore": "256000000000000000000",
+        "totalScore": "256000000000000000000",
       }
     `)
   })
