@@ -49,8 +49,10 @@ export async function generateGaugeResult(
     ethereumChainId,
   })
 
-  const fundationRewards = generateFundationRewards(chainName, exactPeriodId)
-  const projectRewards = generateProjectRewards(chainName, exactPeriodId)
+  const [fundationRewards, projectRewards] = await Promise.all([
+    generateFundationRewards(chainName, exactPeriodId),
+    generateProjectRewards(chainName, exactPeriodId),
+  ])
 
   const allPoolRewards = [...standardGaugePoolRewards, ...stableGaugePoolRewards]
   for (const gaugePoolReward of allPoolRewards) {

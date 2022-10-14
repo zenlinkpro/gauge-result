@@ -44,7 +44,8 @@ export interface RewardForPool extends BasicReward {
 
 export interface GaugeRewards {
   periodId: number
-  rewards: BasicReward[]
+  rewards: RewardForPool[]
+  type: string
 }
 
 export interface ExternalRewards {

@@ -16,8 +16,8 @@ import type { EthereumChainId, GaugePoolInfo, GaugeQueryOptions } from '../types
 import { chainsForWagmi } from '../config'
 import type { GraphPoolState } from '../graph/queries/gauge'
 import { fetchGraphGaugeData } from '../graph/queries/gauge'
-import { basicRewards } from '../rewards'
 import { GaugeRewardsNotFoundError } from '../errors'
+import { generateBasicRewards } from './rewards'
 
 const { provider } = configureChains([...allChains, ...chainsForWagmi], [publicProvider()])
 createClient({ provider })
@@ -41,6 +41,7 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
     throw new Error(`Provided periodId ${periodId} larger than current periodId ${currentPeriodId}`)
 
   const exactPeriodId = periodId ?? Number(currentPeriodId)
+  const gaugeRewards = await generateBasicRewards(chainName, exactPeriodId)
   const { data: graphGaugeData, error: graphError } = await fetchGraphGaugeData(
     chainName,
     gaugeAddress.toLowerCase(),
@@ -91,7 +92,6 @@ export async function generateGaugeInfo(options: GaugeQueryOptions) {
     (totalScore, { score }) => JSBI.add(totalScore, JSBI.BigInt(score)), JSBI.BigInt(0),
   )
 
-  const gaugeRewards = basicRewards[chainName].find(rewards => rewards.periodId === exactPeriodId)
   if (!gaugeRewards)
     error = new GaugeRewardsNotFoundError(exactPeriodId)
 
