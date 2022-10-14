@@ -50,6 +50,7 @@
     "@apollo/client": "^3.6.9",
     "@wagmi/core": "^0.5.7",
     "@zenlink-dex/zenlink-evm-contracts": "^0.0.1",
+    "axios": "^1.1.2",
     "cross-fetch": "^3.1.5",
     "ethers": "^5.7.1",
     "graphql": "^16.6.0",

@@ -50,6 +50,25 @@ describe('chore', () => {
             "stable": false,
             "startBlock": "2834954",
           },
+          {
+            "accRewardPerShare": [
+              "0",
+            ],
+            "amount": "0",
+            "claimableInterval": "100",
+            "farmingToken": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+            "lastRewardBlock": "3001518",
+            "pid": 2,
+            "rewardPerBlock": [
+              "1",
+            ],
+            "rewardTokens": [
+              "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
+            ],
+            "score": "0",
+            "stable": false,
+            "startBlock": "2834954",
+          },
         ],
         "allPoolRewards": [
           {
@@ -126,6 +145,36 @@ describe('chore', () => {
               },
             ],
           },
+          {
+            "pid": 2,
+            "pool": {
+              "accRewardPerShare": [
+                "0",
+              ],
+              "amount": "0",
+              "claimableInterval": "100",
+              "farmingToken": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+              "lastRewardBlock": "3001518",
+              "pid": 2,
+              "rewardPerBlock": [
+                "1",
+              ],
+              "rewardTokens": [
+                "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
+              ],
+              "score": "0",
+              "stable": false,
+              "startBlock": "2834954",
+            },
+            "rewards": [
+              {
+                "amount": "0",
+                "description": "...",
+                "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+                "type": "basic",
+              },
+            ],
+          },
         ],
         "chainName": "Moonbase",
         "contractCallParameters": [
@@ -150,6 +199,17 @@ describe('chore', () => {
               true,
             ],
             "pid": 1,
+          },
+          {
+            "method": "set",
+            "parameters": [
+              2,
+              [
+                "0",
+              ],
+              true,
+            ],
+            "pid": 2,
           },
         ],
         "error": undefined,
@@ -188,6 +248,25 @@ describe('chore', () => {
             "stable": false,
             "startBlock": "2834954",
           },
+          {
+            "accRewardPerShare": [
+              "0",
+            ],
+            "amount": "0",
+            "claimableInterval": "100",
+            "farmingToken": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+            "lastRewardBlock": "3001518",
+            "pid": 2,
+            "rewardPerBlock": [
+              "1",
+            ],
+            "rewardTokens": [
+              "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
+            ],
+            "score": "0",
+            "stable": false,
+            "startBlock": "2834954",
+          },
         ],
         "allPoolRewards": [
           {
@@ -214,6 +293,36 @@ describe('chore', () => {
             "rewards": [
               {
                 "amount": "80000000000000000",
+                "description": "...",
+                "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+                "type": "basic",
+              },
+            ],
+          },
+          {
+            "pid": 2,
+            "pool": {
+              "accRewardPerShare": [
+                "0",
+              ],
+              "amount": "0",
+              "claimableInterval": "100",
+              "farmingToken": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+              "lastRewardBlock": "3001518",
+              "pid": 2,
+              "rewardPerBlock": [
+                "1",
+              ],
+              "rewardTokens": [
+                "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
+              ],
+              "score": "0",
+              "stable": false,
+              "startBlock": "2834954",
+            },
+            "rewards": [
+              {
+                "amount": "0",
                 "description": "...",
                 "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
                 "type": "basic",
@@ -259,6 +368,25 @@ describe('chore', () => {
             "stable": false,
             "startBlock": "2834954",
           },
+          {
+            "accRewardPerShare": [
+              "0",
+            ],
+            "amount": "0",
+            "claimableInterval": "100",
+            "farmingToken": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+            "lastRewardBlock": "3001518",
+            "pid": 2,
+            "rewardPerBlock": [
+              "1",
+            ],
+            "rewardTokens": [
+              "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
+            ],
+            "score": "0",
+            "stable": false,
+            "startBlock": "2834954",
+          },
         ],
         "allPoolRewards": [
           {
@@ -285,6 +413,36 @@ describe('chore', () => {
             "rewards": [
               {
                 "amount": "80000000000000000",
+                "description": "...",
+                "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+                "type": "basic",
+              },
+            ],
+          },
+          {
+            "pid": 2,
+            "pool": {
+              "accRewardPerShare": [
+                "0",
+              ],
+              "amount": "0",
+              "claimableInterval": "100",
+              "farmingToken": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
+              "lastRewardBlock": "3001518",
+              "pid": 2,
+              "rewardPerBlock": [
+                "1",
+              ],
+              "rewardTokens": [
+                "0x1E80A824Ed280c5Ee783D76fdcB634a67C95Edb7",
+              ],
+              "score": "0",
+              "stable": false,
+              "startBlock": "2834954",
+            },
+            "rewards": [
+              {
+                "amount": "0",
                 "description": "...",
                 "token": "0xB5989e3Eb10bBe04b962586910C0bBC1238baD78",
                 "type": "basic",

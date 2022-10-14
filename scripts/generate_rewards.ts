@@ -35,10 +35,10 @@ for (const dir of dirs) {
       },
     ]
   }
-  const targetFile = `src/rewards/${dir}/index.ts`
+  const targetFile = `src/rewards/${dir}/${dir}.json`
   await fs.writeFile(
     targetFile,
-    `// Auto generated\n\n export const ${dir}Rewards = ${JSON.stringify(configMap, null, 2)}`,
+    `${JSON.stringify(configMap, null, 2)}`,
     'utf-8',
   )
 
